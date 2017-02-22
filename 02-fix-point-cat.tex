@@ -1,0 +1,43 @@
+\section{Fixed point theory for categories}
+
+\begin{lem}
+  Let \(\mathcal{C}\) be a category and \(F \colon \mathcal{C} \to \mathcal{C}\) an endofunctor.
+  If \((A,\alpha)\) is an initial prefixed point of \(F\), then it is also an initial fixed point of \(F\).
+\end{lem}
+\begin{proof}
+  Being \((A,\alpha)\) a prefixed point of \(F\), it follows that \((F(A),F(\alpha))\) --- where \(F(\alpha)\) goes from \(F(F(A))\) to \(F(A)\) --- is a prefixed point of \(F\).
+  Moreover, thanks to the initiality of \((A,\alpha)\), we can consider the unique morphism \(f \colon (A,\alpha) \to (F(A),F(\alpha))\); both the cells of the diagram~\ref{02:diagram-1}
+  \begin{figure}[!ht]
+    \begin{center}
+      \begin{tikzcd}
+        F(A) \arrow[r, "F(f)"] \arrow[d, "\alpha"]
+        & F(F(A)) \arrow[r, "F(\alpha)"] \arrow[d, "F(\alpha)"]
+        & F(A) \arrow[d, "\alpha"]\\
+        A \arrow[r, "f"] & F(A) \arrow[r, "\alpha"]& A
+      \end{tikzcd}
+    \end{center}
+    \caption{The cell on the left commutes trivially; the right one, because \(\alpha\) is a morphism from \((F(A),F(\alpha))\) to \((A,\alpha)\). [\textbf{Da rivedere}]}
+    \label{02:diagram-1}
+  \end{figure}
+  commute.
+  Then, we can see that \(f\) is the inverse of \(\alpha\), since
+  \begin{align}
+    \alpha \circ f &= \mathrm{id}_A \\
+    f \circ \alpha &= F(\alpha) \circ F(f) = F (\alpha \circ f) = F(\mathrm{id}_A) = \mathrm{id}_{F(A)}.
+  \end{align}
+  From this, we obtain that \((A,\alpha)\) is a fixed point of \(F\).
+  Finally, we conclude that it is also initial: the category of fixed points of \(F\) is in fact a full subcategory of the category of prefixed points of \(F\).
+\end{proof}
+
+\paragraph{Da sistemare} qui ci starebbe bene un commento di introduzione al piatto forte della sezione\dots
+
+\begin{thm}[initial fixed point theorem]
+  Let \(\mathcal{C}\) be a complete category, \(F\) a continuous endofunctor of \(F\), and \(U\) an initial object of \(\mathcal{C}\). If \(u\) is the unique morphism from \(U\) to \(F(U)\), then
+  \begin{equation}
+    \Delta := \lbrace (F^n(U),F^n(u)) \rbrace_{n \in \mathbb{N}}
+  \end{equation}
+  is an \(\omega\)-chain, and for each colimit \((A,\mu)\) of \(\Delta\) there is a morphism \(\alpha \colon F(A) \to A\) such that \((A,\alpha)\) is an initial fixed point of \(F\).
+\end{thm}
+\begin{proof}
+  Questa la scrivo la prossima volta.
+\end{proof}

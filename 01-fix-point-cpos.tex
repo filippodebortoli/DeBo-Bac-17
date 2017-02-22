@@ -1,0 +1,41 @@
+\section{Fixed point theory for partially ordered sets}
+
+\begin{dfn}
+  A \emph{partially ordered set} --- \emph{poset} --- is a pair
+  \((C, \lhd)\), where \(C\) is a set and \({}\lhd{}\) is a binary relation
+  on it which is reflexive, antisymmetric and transitive.
+\end{dfn}
+
+In a poset \((C, {}\lhd)\), an element \(c \in C\) is a \emph{minimal}
+element of \(C\) iff there isn't any \(y \in C\) different from \(x\) such
+that \(y \lhd x\), and it is a \emph{least} one iff each \(y \in C\) satisfies
+\(x \lhd y\).
+Similarly, we can define the notions of \emph{maximal} and \emph{greatest}
+elements of a poset.
+
+% Saltati un po' di pezzi.
+
+\begin{dfn}
+  An \(\omega{}\)-\emph{complete partial order} --- \(\omega{}\)-\emph{cpo} ---
+  is a poset with a least element in which every ascending \(\omega{}\)-chain
+  has a least upper bound in it.
+\end{dfn}
+
+\begin{dfn}
+  Let \((C, {}<)\) and \((C^\prime, {}\lhd)\) be posets.
+  A function \(f \colon C \to C^\prime\) is \emph{monotonic} iff
+  \[
+    \forall x,y \in C.\, x \lhd y \implies f(x) \lhd f(y).
+  \]
+\end{dfn}
+
+\begin{dfn}
+  Let \(C\) and \(C^\prime\) be \(\omega{}\)-cpos.
+  A function \(f \colon C \to C^\prime\) is \(\omega{}\)-\emph{continuous}
+  iff it is monotonic and, for each ascending \(\omega{}\)-chain
+  \(\lbrace x_i \rbrace_{i=0}^\infty\) in \(C\),
+  \[
+  f\left(\bigcup_{i=0}^\infty x_i\right) = \bigcup_{i=0}^\infty f(x_i).
+  \]
+\end{dfn}
+

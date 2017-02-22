@@ -1,11 +1,14 @@
-% arara: pdflatex
-% arara: pdflatex
-\documentclass[draft]{article}
+% arara: pdflatex main.tex
+% arara: pdflatex main-frn.tex
+% arara: pdflatex main.tex
+\documentclass[draft, titlepage]{article}
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 
 \usepackage{microtype}
+%\usepackage{frontespizio}
 
 \usepackage{tikz}
 \usetikzlibrary{cd}
@@ -14,9 +17,27 @@
 \usepackage{amssymb}
 \usepackage{biblatex}
 \usepackage{mathpazo}
+\usepackage[font={color=gray,small}, justification=centerlast, width=.75\textwidth]{caption}
 
-%\usepackage{notation}
+\usepackage{notation}
 
 \begin{document}
+
+% \begin{frontespizio}
+%   \Universita{Trento}
+%   \Facolta{Scienze Matematiche, Fisiche e Naturali}
+%   \Corso[Laurea]{Matematica}
+%   \Titoletto{Tesi di laurea}
+%   \Titolo{Recursive domain equations:\\
+%   a categorical perspective}
+%   \Candidato[166041]{Filippo De Bortoli}
+%   \Relatore{Roberto Zunino}
+%   \Annoaccademico{2015-2016}
+% \end{frontespizio}
+
   \tableofcontents
+  
+  \include{01-fix-point-cpos}
+  \include{02-fix-point-cat}
+  
 \end{document}
