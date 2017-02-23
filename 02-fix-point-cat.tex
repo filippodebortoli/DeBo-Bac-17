@@ -39,5 +39,64 @@
   is an \(\omega\)-chain, and for each colimit \((A,\mu)\) of \(\Delta\) there is a morphism \(\alpha \colon F(A) \to A\) such that \((A,\alpha)\) is an initial fixed point of \(F\).
 \end{thm}
 \begin{proof}
-  Questa la scrivo la prossima volta.
+  To prove that \(\Delta\) is an \(\omega\)-chain, we show by induction on \(n \in \mathbb{N}\) that the morphism \(F^n(u)\) belongs to \(\hom(F^n(U),F^{n+1}(U))\).
+  The induction basis is given by our hypothesis, indeed \(F^0(u) = u\) is a morphism from \(F^0(U) = U\) to \(F(U)\).
+  Assuming now the inductive hypothesis for \(n \in \mathbb{N}\)
+  \begin{align*}
+    F^n(u) &\in \hom(F^n(U),F^{n+1}(U))
+    \intertext{we can see that}
+    F(F^n(u)) = F^{n+1}(u) &\in \hom(F^{n+1}(U),F^{(n+1)+1}(U)),
+  \end{align*}
+  and this makes the induction step proved.
+  
+  Now, let \((A,\lbrace \mu_n \rbrace_{n\in\mathbb{N}})\) be a colimit of \(\Delta\). Then,
+  \begin{enumerate}
+    \item \((A,\lbrace \mu_{n+1} \rbrace_{n\in\mathbb{N}})\) is a colimit of \(\lbrace (F^{n+1}(U), F^{n+1}(u))\rbrace_{n\in\mathbb{N}}\), and
+    \item \((F(A), \lbrace F(\mu_n) \rbrace_{n \in \mathbb{N}})\) is a colimit of \(\lbrace (F^{n+1}(U), F^{n+1}(u)) \rbrace_{n \in \mathbb{N}}\), because
+    \begin{equation*}
+      F(\mu_n) = F(\mu_{n+1} \circ F^n(u)) = F(\mu_{n+1}) \circ F^{n+1}(U).
+    \end{equation*}
+  \end{enumerate}
+  Colimits are unique up to isomorphism, thus there exists a unique mediating isomorphism \(\alpha \colon F(A) \to A\), and the object \((A,\alpha)\) is a fixed point of the endofunctor \(F\).
+  
+  \paragraph{Initality of \((A,\alpha)\).} Let \((B,\beta)\) be another fixed point of \(F\).
+  Being \(B\) an object of \(\mathcal{C}\), there exists a unique morphism \(\nu_0 \colon U \to B\).
+  For \(n \in \mathbb{N}\), we define \(\nu_{n+1} := \beta \circ F(\nu_n)\).
+  Then, \((B,\lbrace \nu_n \rbrace_{n \in \mathbb{N}})\) is a co-cone for \(\Delta\). We show this to be true by induction on \(n \in \mathbb{N}\):
+  \begin{description}
+    \item[Basis case]
+    \begin{equation}
+      \nu_1 \circ F^0(u) = \beta \circ F(\nu_0) \circ u = \nu_0,
+    \end{equation}
+    thanks to the commutativity of the diagram~\ref{02:diagram-2}:
+    \begin{figure}[!ht]
+      \begin{center}
+        \begin{tikzcd}
+          U \arrow[r, "u"] \arrow[rrr, "\nu_0", bend right=30]
+          & F(U) \arrow[r, "F(\nu_0)"]
+          & F(B) \arrow[r, "\beta"]
+          & B
+        \end{tikzcd}
+      \end{center}
+      \caption{Both \(\beta \circ F(\nu_0) \circ u\) and \(\nu_0\) are morphisms from \(U\) to \(B\): being \(U\) initial, there is a unique arrow from \(U\) to \(B\), thus the equality of the morphisms.}
+      \label{02:diagram-2}
+    \end{figure}
+    \item[Induction step] Assuming that \(\nu_n = \nu_{n+1} \circ F^n(u)\) holds for \(n \in \mathbb{N}\), we obtain
+    \begin{equation*}
+      \begin{split}
+        \nu_{(n+1)+1} \circ F^{n+1}(U) &=
+        \beta \circ F(\nu_{n+1}) \circ F^{n+1}(U)
+        = \beta \circ F(\nu_{n+1} \circ F^n(U)) \\
+        &= \beta \circ F(\nu_n) = \nu_{n+1}.
+      \end{split}
+    \end{equation*}
+  \end{description}
+  Thanks to the colimit property, being \((B,\lbrace \nu_n \rbrace_{n \in \mathbb{N}})\) a co-cone for \(\Delta\), there is a unique mediating morphism \(\xi\) such that
+  \begin{equation*}
+    \xi \colon A \to B \quad\text{and}\quad \forall n \in \mathbb{N}.\, \nu_n = \xi \circ \mu_n.
+  \end{equation*}
+  
+  Next, we want to prove that \(\xi\) is also a morphism from \((A,\alpha)\) to \((B,\beta)\), and that it is the only one.
+  
+  \textbf{[Ok, da qui si prosegue la prossima volta.]}
 \end{proof}
