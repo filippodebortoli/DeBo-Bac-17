@@ -98,5 +98,63 @@
   
   Next, we want to prove that \(\xi\) is also a morphism from \((A,\alpha)\) to \((B,\beta)\), and that it is the only one.
   
-  \textbf{[Ok, da qui si prosegue la prossima volta.]}
+  Both \((A,\lbrace \mu_n \rbrace_{n \in \mathbb{N}})\) and \((B,\lbrace \nu_n \rbrace_{n \in \mathbb{N}})\) are co-cones for \(\Delta\), thus
+  \begin{equation}
+    \forall n \in \mathbb{N}.\,
+    \begin{cases}
+      \mu_{n+1} = \alpha \circ F(\mu_n) \\
+      \nu_{n+1} = \beta \circ F(\nu_n).
+    \end{cases}
+  \end{equation}
+  
+  Then, for each positive integer \(n\),
+  \begin{equation}
+    \nu_{n+1} = \beta \circ F(\nu_n) = \beta \circ F(\xi) \circ F(\mu_n)
+     = \beta \circ F(\xi) \circ \alpha^{-1} \circ \mu_{n+1}
+  \end{equation}
+  Moreover, as illustrated in Figure~\ref{02:diagram-3},
+  \begin{equation}
+    \nu_{0} = \beta \circ F(\xi) \circ \alpha^{-1} \circ \mu_{0}. 
+  \end{equation}
+  \begin{figure}[!ht]
+    \begin{center}
+      \begin{tikzcd}
+        U \arrow[r, "\mu_0"] \arrow[rrrr, "\nu_0", bend right=30]
+        & A \arrow[r, "\alpha^{-1}"]
+        & F(A) \arrow[r, "F(\xi)"]
+        & F(B) \arrow[r, "\beta"]
+        & B
+      \end{tikzcd}
+    \end{center}
+    \caption{Thanks to the initiality of \(U\), the illustrated diagram commutes.}
+    \label{02:diagram-3}
+  \end{figure}
+  
+  Being \(\xi\) the unique mediating morphism between the two considered co-cones, we get the equality
+  \begin{equation}
+    \label{eqn:asd}
+    \xi = \beta \circ F(\xi) \circ \alpha^{-1};
+  \end{equation}
+  this implies that \(\xi\) is also a morphism of fixed points from \((A,\alpha)\) to \((B,\beta)\).
+  
+  \paragraph{Uniqueness of \(\xi\).} Let \(\lambda\) be another morphism of fixed points from \((A,\alpha)\) to \((B,\beta)\). Thanks to~\eqref{eqn:asd},
+  \begin{align}
+    \lambda \circ \alpha &= \beta \circ F(\lambda)
+    \intertext{and}
+    \lambda \circ \mu_0 &= (\lambda \circ \alpha) \circ \alpha^{-1} \circ \mu_0
+    = \beta \circ F(\lambda) \circ \alpha^{-1} \circ \mu_0 = \nu_0.
+  \end{align}
+  Assuming now that \(\lambda \circ \mu_n = \nu_n\),
+  \begin{equation}
+    \begin{split}
+      \lambda \circ \mu_{n+1} &= \lambda \circ \alpha \circ F(\mu_n) =
+      \beta \circ F(\lambda) \circ F(\mu_n) \\
+      &= \beta \circ F(\lambda \circ \mu_n) = \beta \circ F(\nu_n) = \nu_{n+1}.
+    \end{split}
+  \end{equation}
+  Finally, for each \(n \in \mathbb{N}\),
+  \begin{equation}
+    \lambda \circ \mu_n = \nu_n \land \xi \circ \mu_n = \nu_n \implies
+    \lambda = \xi.
+  \end{equation}
 \end{proof}
