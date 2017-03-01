@@ -1,5 +1,10 @@
 \section{Fixed point theory for categories}
 
+\begin{dfn}
+  Let \(\mathcal{C}\) be a category and \(F\) be an endofunctor on \(\mathcal{C}\).
+  Then, a \emph{prefixed point} of \(F\) --- also called an \(F\)-algebra --- is a pair \((A,\alpha)\) where \(A\) is an object of \(\mathcal{C}\) and \(\alpha \colon F(A) \to A\) a morphism of \(\mathcal{C}\); a \emph{fixed point} of \(F\) is a prefixed point where \(\alpha \colon F(A) \simeq A\) is an isomorphism.
+\end{dfn}
+
 \begin{lem}
   Let \(\mathcal{C}\) be a category and \(F \colon \mathcal{C} \to \mathcal{C}\) an endofunctor.
   If \((A,\alpha)\) is an initial prefixed point of \(F\), then it is also an initial fixed point of \(F\).

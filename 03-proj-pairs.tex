@@ -1,0 +1,20 @@
+\section{\(\mathbf{O}\)--categories}
+
+This section goes along with the work presented in \cite{MR677666}.
+
+\begin{dfn}
+  A category is an \emph{\(\mathbf{O}\)--category} if and only if:
+  \begin{enumerate}
+    \item every hom--set is a partial order in which every ascending \(\omega\)--chain has a least upper bound, and
+    \item composition of morphisms is an \(\omega\)--continuous operation with respect to this partial order.
+  \end{enumerate}
+\end{dfn}
+
+\begin{dfn}
+  Let \(\mathcal{C}\) be an \(\mathbf{O}\)--category. Then, every tuple \((f,g)\) satisfying
+  \begin{align}
+    f &\colon A \to B & g \circ f = \mathrm{id}_A \quad  \\
+    g &\colon B \to A & f \circ g \sqsubseteq \mathrm{id}_B \quad 
+  \end{align}
+  with \(A,B \in \lvert\mathcal{C}\rvert\) is called a \emph{projection pair}, where \(f\) is an \emph{embedding} and \(g\) a \emph{projection}.
+\end{dfn}

@@ -1,12 +1,21 @@
-% arara: pdflatex main.tex
-% arara: pdflatex main-frn.tex
-% arara: pdflatex main.tex
+% arara: clean
+% arara: pdflatex
+% arara: biber
+% arara: pdflatex
+% arara: pdflatex
 \documentclass[draft, titlepage]{article}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
 \usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 
+
+
+\usepackage[backend=biber]{biblatex}
+  \addbibresource{bibliography.bib}
+\usepackage{csquotes}
+
+\usepackage{ebgaramond}
 \usepackage{microtype}
 %\usepackage{frontespizio}
 
@@ -15,8 +24,7 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{biblatex}
-\usepackage{mathpazo}
+%\usepackage{mathpazo}
 \usepackage[font={color=gray,small}, justification=centerlast, width=.75\textwidth]{caption}
 
 \usepackage{notation}
@@ -39,5 +47,7 @@
   
   \include{01-fix-point-cpos}
   \include{02-fix-point-cat}
+  \include{03-proj-pairs}
+  \printbibliography
   
 \end{document}
