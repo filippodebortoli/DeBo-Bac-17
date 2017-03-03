@@ -18,3 +18,44 @@ This section goes along with the work presented in \cite{MR677666}.
   \end{align}
   with \(A,B \in \lvert\mathcal{C}\rvert\) is called a \emph{projection pair}, where \(f\) is an \emph{embedding} and \(g\) a \emph{projection}.
 \end{dfn}
+
+\begin{lem}
+  Let \((f,g)\) and \((h,k)\) be projection pairs from \(A\) to \(B\) in the \(\mathbf{O}\)--category \(\mathcal{C}\). Then,
+  \begin{equation*}
+    f \sqsubseteq h \iff k \sqsubseteq g \qquad \text{and} \qquad
+    f = h \iff g = k.
+  \end{equation*}
+\end{lem}
+\begin{proof}
+  Assume that \(f \sqsubseteq h\). Since composition is \(\omega\)--continuous --- hence monotonic --- we find
+  \begin{equation*}
+    k = \mathrm{id}_A \circ k = (g \circ f) \circ k
+    \sqsubseteq (g \circ h) \circ k \sqsubseteq g \circ \mathrm{id}_B = g.
+  \end{equation*}
+  Similarly, we prove the opposite implication. Finally,
+  \begin{equation*}
+    f = h \iff f \sqsubseteq h \land h \sqsubseteq f
+    \iff k \sqsubseteq g \land g \sqsubseteq k \iff g = k.
+  \end{equation*}
+\end{proof}
+
+For any given \(\mathbf{O}\)--category \(\mathcal{C}\), we can define the category of its projection pairs \(\mathcal{C}_\textup{PR}\) in the following way:
+\begin{enumerate}
+  \item the \emph{objects} of \(\mathcal{C}_\textup{PR}\) are the same as \(\mathcal{C}\);
+  \item each \emph{hom--set} \(\hom(A,B)\) corresponds to the set of all projection pairs from \(A\) to \(B\);
+  \item the \emph{composition} of projection pairs \(\alpha \colon A \to B\) and \(\beta \colon B \to C\) is the pair \((\beta^\textup{L} \circ \alpha^\textup{L}, \alpha^\textup{R} \circ \beta^\textup{R})\) which is indeed a projection pair from \(A\) to \(C\), as shown in Diagram~\ref{03:dia-1};
+  \item the \emph{identity} of \(\hom(A,A)\) is the pair \((\mathrm{id}_A,\mathrm{id}_A)\).
+\end{enumerate}
+\begin{figure}%[!ht]
+  \begin{center}
+    \begin{tikzcd}
+      & C \arrow[d, "\beta^\textup{R}"] & \\
+      A \arrow[r, "\alpha^\textup{L}"] &
+      B \arrow[r, "\beta^\textup{L}"] \arrow[d, "\alpha^\textup{R}"] &
+      C \arrow[ul, "\mathrm{id}_C" description]\\
+      & A  \arrow[ul, "\mathrm{id}_A" description]&
+    \end{tikzcd}
+  \end{center}
+  \caption{We can easily compute the compositions of the embedding \(\beta^\textup{L} \circ \alpha^\textup{L}\) and of the projection \(\alpha^\textup{R} \circ \beta^\textup{R}\) to verify that they form a projection pair from \(A\) to \(C\).} 
+  \label{03:dia-1}
+\end{figure}

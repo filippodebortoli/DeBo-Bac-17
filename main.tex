@@ -3,22 +3,28 @@
 % arara: biber
 % arara: pdflatex
 % arara: pdflatex
+% arara: lmkclean
 \documentclass[draft, titlepage]{article}
 
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
-
+%\usepackage[cmintegrals,cmbraces]{newtxmath}
+%\usepackage{ebgaramond}
+%\usepackage{ebgaramond-maths}
+%\usepackage[urw-garamond]{mathdesign}
+%\usepackage{garamondx}
+\usepackage[sc,osf]{mathpazo} % add possibly `sc` and `osf` options
+\usepackage[euler-digits]{eulervm}
 
 \usepackage[backend=biber]{biblatex}
   \addbibresource{bibliography.bib}
 \usepackage{csquotes}
 
-\usepackage{ebgaramond}
+
 \usepackage{microtype}
 %\usepackage{frontespizio}
-
 \usepackage{tikz}
 \usetikzlibrary{cd}
 \usepackage{amsthm}
