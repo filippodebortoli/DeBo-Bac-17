@@ -1,59 +1,62 @@
-% arara: clean
-% arara: pdflatex
+% arara: frontespizio
 % arara: biber
 % arara: pdflatex
-% arara: pdflatex
 % arara: lmkclean
-\documentclass[draft, titlepage]{article}
+\documentclass[draft,titlepage]{article}
 
+%%% Font and language-related packages. %%%
 \usepackage[english]{babel}
-\usepackage[T1]{fontenc}
+\usepackage[OT1]{fontenc}
 \usepackage[utf8]{inputenc}
 
-%\usepackage[cmintegrals,cmbraces]{newtxmath}
-%\usepackage{ebgaramond}
-%\usepackage{ebgaramond-maths}
-%\usepackage[urw-garamond]{mathdesign}
-%\usepackage{garamondx}
-\usepackage[sc,osf]{mathpazo} % add possibly `sc` and `osf` options
+\usepackage[sc,osf]{mathpazo}
 \usepackage[euler-digits]{eulervm}
 
+%%% Document-related packages. %%%
+\usepackage{frontespizio}
+\usepackage[]{geometry}
+\usepackage{microtype}
+
+%%% Math-related packages. %%%
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%%% Bibliography-related packages. %%%
 \usepackage[backend=biber]{biblatex}
   \addbibresource{bibliography.bib}
 \usepackage{csquotes}
 
-
-\usepackage{microtype}
-%\usepackage{frontespizio}
+%%% Graphics-related packages. %%%
 \usepackage{tikz}
 \usetikzlibrary{cd}
-\usepackage{amsthm}
-\usepackage{amsmath}
-\usepackage{amssymb}
-%\usepackage{mathpazo}
+
 \usepackage[font={color=gray,small}, justification=centerlast, width=.75\textwidth]{caption}
 
+%%% Other packages. %%%
 \usepackage{notation}
 
 \begin{document}
 
-% \begin{frontespizio}
-%   \Universita{Trento}
-%   \Facolta{Scienze Matematiche, Fisiche e Naturali}
-%   \Corso[Laurea]{Matematica}
-%   \Titoletto{Tesi di laurea}
-%   \Titolo{Recursive domain equations:\\
-%   a categorical perspective}
-%   \Candidato[166041]{Filippo De Bortoli}
-%   \Relatore{Roberto Zunino}
-%   \Annoaccademico{2015-2016}
-% \end{frontespizio}
+  \begin{frontespizio}
+    \Preambolo{\usepackage[sc,osf]{mathpazo}}
+    \Universita{Trento}
+    \Facolta{Scienze Matematiche, Fisiche e Naturali}
+    \Corso[Laurea]{Matematica}
+    \Titoletto{Tesi di laurea}
+    \Titolo{Recursive domain equations:\\
+    a categorical perspective}
+    \Candidato[166041]{Filippo De Bortoli}
+    \Relatore{Roberto Zunino}
+    \Annoaccademico{2016--2017}
+  \end{frontespizio}
 
   \tableofcontents
-  
+
+  \include{00-introduction}
   \include{01-fix-point-cpos}
   \include{02-fix-point-cat}
   \include{03-proj-pairs}
   \printbibliography
-  
+
 \end{document}
