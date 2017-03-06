@@ -1,17 +1,70 @@
 \section{Fixed point theory for categories}
 
+\subsection{Preliminary notions}
+
+\begin{dfn}
+  A \emph{category} \(\mathcal{C}\) consists of a class \(\obj{\mathcal{C}}\), called the \emph{objects} of \(\mathcal{C}\), and for all \(A\), \(B\), \(C\) in \(\obj{\mathcal{C}}\):
+  \begin{enumerate}
+    \item a set \(\hom(A,B)\), the \emph{hom--set} of \emph{morphisms} from \(A\) to \(B\);
+    \item an associative map
+    \begin{equation}
+      \circ \colon \hom(B,C) \times \hom(A,B) \to \hom(A,C)
+    \end{equation}
+    called \emph{composition};
+    \item an element \(\mathrm{id}_A \in \hom(A,A)\) called the \emph{identity} of \(A\), such that, for all morphisms \(f \colon A \to B\) and \(g \colon B \to A\), \(f \circ \mathrm{id}_A = f\) and \(\mathrm{id}_A \circ g = g\).
+    \begin{center}
+      \begin{tikzcd}
+        A \arrow[loop left]{l}{\mathrm{id}_A}
+          \arrow[r, yshift=2pt, "f"] & B \arrow[l, yshift=-2pt, "g"]
+      \end{tikzcd}
+  \end{center}
+  \end{enumerate}
+\end{dfn}
+
+For each category \(\mathcal{C}\), we can consider its \emph{dual} category \(\mathcal{C}^\textup{op}\), which objects are the same as those of \(\mathcal{C}\) and arrows are opposite of those in \(\mathcal{C}\), i.e. if \(f \colon A \to B\) in \(\mathcal{C}\), then \(f \colon B \to A\) in \(\mathcal{C}^\textup{op}\).
+Also, we say that a category \(\mathcal{L}\) is a \emph{full subcategory} of \(\mathcal{C}\) if and only if \(\obj{\mathcal{L}}\) is a subclass of \(\obj{\mathcal{C}}\) and the hom--sets are preserved.
+
+\begin{dfn}
+  A morphism \(f \colon A \to B\) is an \emph{isomorphism} if and only if there exists \(g \colon B \to A\) such that \(f \circ g = \id{B}\) and \(g \circ f = \id{A}\), i.e.
+  \begin{center}
+    \begin{tikzcd}
+      A \arrow[loop left]{l}{\mathrm{id}_A}
+        \arrow[r, yshift=2pt, "f"] & B \arrow[l, yshift=-2pt, "g"] \arrow[loop right]{r}{\id{B}}
+    \end{tikzcd}
+  \end{center}
+  commutes. The morphism \(g\) is called the \emph{inverse} of \(f\), denoted with \(f^{-1}\).
+\end{dfn}
+
+Is there an entity in category theory which is analog to the concept of the least element of a poset?
+
+\begin{dfn}
+  An \emph{initial} object of a category \(\mathcal{C}\) is an object \(\bot_{\mathcal{C}}\) such that there is a unique morphism from \(A\) to each object of \(\mathcal{C}\).
+  An object is \emph{terminal} in \(\mathcal{C}\) if and only if it is initial in \(\mathcal{C}^\textup{op}\).
+\end{dfn}
+
+The initial object of a category is unique up to isomorphism. Indeed, let \(\bot_{\mathcal{C}}\) and \(\bot_{\mathcal{C}}^\prime\) be both initial objects: then, the following diagram commutes,
+\begin{center}
+  \begin{tikzcd}
+    \bot_{\mathcal{C}} \arrow[loop left]{l}{\id{\bot_{\mathcal{C}}}}
+      \arrow[r, yshift=2pt, "f"] & \bot_{\mathcal{C}}^\prime \arrow[l, yshift=-2pt, "g"] \arrow[loop right]{r}{\id{\bot_{\mathcal{C}}^\prime}}
+  \end{tikzcd}
+\end{center}
+assuming that \(f \colon \bot_{\mathcal{C}} \to \bot_{\mathcal{C}}^\prime\) and \(g \colon \bot_{\mathcal{C}}^\prime \to \bot_{\mathcal{C}}\).
+
 \begin{dfn}
   Let \(\mathcal{C}\) be a category and \(F\) be an endofunctor on \(\mathcal{C}\).
   Then, a \emph{prefixed point} of \(F\) --- also called an \(F\)-algebra --- is a pair \((A,\alpha)\) where \(A\) is an object of \(\mathcal{C}\) and \(\alpha \colon F(A) \to A\) a morphism of \(\mathcal{C}\); a \emph{fixed point} of \(F\) is a prefixed point where \(\alpha \colon F(A) \simeq A\) is an isomorphism.
 \end{dfn}
 
+\subsection{Basic lemma(?)}
+
 \begin{lem}
-  Let \(\mathcal{C}\) be a category and \(F \colon \mathcal{C} \to \mathcal{C}\) an endofunctor.
-  If \((A,\alpha)\) is an initial prefixed point of \(F\), then it is also an initial fixed point of \(F\).
+  Let \(\mathcal{C}\) be a category and \(F\) an endofunctor on \(\mathcal{C}\).
+  The initial \(F\)--algebra, if it exists, is also the initial fixed point.
 \end{lem}
 \begin{proof}
-  Being \((A,\alpha)\) a prefixed point of \(F\), it follows that \((F(A),F(\alpha))\) --- where \(F(\alpha)\) goes from \(F(F(A))\) to \(F(A)\) --- is a prefixed point of \(F\).
-  Moreover, thanks to the initiality of \((A,\alpha)\), we can consider the unique morphism \(f \colon (A,\alpha) \to (F(A),F(\alpha))\); both the cells of the diagram~\ref{02:diagram-1}
+  First, we make the assumption that \((A,\alpha)\) is the initial \(F\)--algebra. It follows that \((F(A),F(\alpha))\) is also an \(F\)--algebra, with \(F(\alpha) \colon F(F(A)) \to F(A)\).
+  Being \((A,\alpha)\) initial, there is a unique \(F\)--morphism \(f \colon (A,\alpha) \to (F(A),F(\alpha))\). Moreover, both the cells of the Diagram~\ref{02:dia-1} commute.
   \begin{figure}[!ht]
     \begin{center}
       \begin{tikzcd}
@@ -22,76 +75,79 @@
       \end{tikzcd}
     \end{center}
     \caption{The cell on the left commutes trivially; the right one, because \(\alpha\) is a morphism from \((F(A),F(\alpha))\) to \((A,\alpha)\). [\textbf{Da rivedere}]}
-    \label{02:diagram-1}
+    \label{02:dia-1}
   \end{figure}
-  commute.
-  Then, we can see that \(f\) is the inverse of \(\alpha\), since
-  \begin{align}
+
+  Then, \(f\) is the two--sided inverse of \(\alpha\), since
+  \begin{align*}
     \alpha \circ f &= \mathrm{id}_A \\
     f \circ \alpha &= F(\alpha) \circ F(f) = F (\alpha \circ f) = F(\mathrm{id}_A) = \mathrm{id}_{F(A)}.
-  \end{align}
-  From this, we obtain that \((A,\alpha)\) is a fixed point of \(F\).
-  Finally, we conclude that it is also initial: the category of fixed points of \(F\) is in fact a full subcategory of the category of prefixed points of \(F\).
+  \end{align*}
+  We can finally conclude that \((A,\alpha)\) is the initial fixed point of \(F\), because \(\alpha\) is an isomorphism and initiality of \((A,\alpha)\) is preserved in the full subcategory of fixed points.
 \end{proof}
+
+\begin{dfn}
+  A category \(\mathcal{C}\) is an \emph{\(\omega\)--category} if and only if it has an initial element, and every \(\omega\)--chain has a colimit.
+\end{dfn}
 
 \paragraph{Da sistemare} qui ci starebbe bene un commento di introduzione al piatto forte della sezione\dots
 
 \begin{thm}[initial fixed point theorem]
-  Let \(\mathcal{C}\) be a complete category, \(F\) a continuous endofunctor of \(F\), and \(U\) an initial object of \(\mathcal{C}\). If \(u\) is the unique morphism from \(U\) to \(F(U)\), then
+  Let \(\mathcal{C}\) be a complete category, \(F\) a continuous endofunctor of \(F\), and \(\bot_{\mathcal{C}}\) an initial object of \(\mathcal{C}\). If \(\bot_{F(\bot)}\) is the unique morphism from \(\bot_{\mathcal{C}}\) to \(F(\bot_{\mathcal{C}})\), then
   \begin{equation}
-    \Delta := \lbrace (F^n(U),F^n(u)) \rbrace_{n \in \mathbb{N}}
+    \Delta := \lbrace (F^n(\bot_{\mathcal{C}}),F^n(\bot_{F(\bot)})) \rbrace_{n \in \mathbb{N}}
   \end{equation}
   is an \(\omega\)-chain, and for each colimit \((A,\mu)\) of \(\Delta\) there is a morphism \(\alpha \colon F(A) \to A\) such that \((A,\alpha)\) is an initial fixed point of \(F\).
 \end{thm}
 \begin{proof}
-  To prove that \(\Delta\) is an \(\omega\)-chain, we show by induction on \(n \in \mathbb{N}\) that the morphism \(F^n(u)\) belongs to \(\hom(F^n(U),F^{n+1}(U))\).
-  The induction basis is given by our hypothesis, indeed \(F^0(u) = u\) is a morphism from \(F^0(U) = U\) to \(F(U)\).
+  To prove that \(\Delta\) is an \(\omega\)-chain, we show by induction on \(n \in \mathbb{N}\) that the morphism \(F^n(\bot_{F(\bot)})\) belongs to \(\hom(F^n(\bot_{\mathcal{C}}),F^{n+1}(\bot_{\mathcal{C}}))\).
+  The induction basis is given by our hypothesis, indeed \(F^0(\bot_{F(\bot)}) = \bot_{F(\bot)}\) is a morphism from \(F^0(\bot_{\mathcal{C}}) = \bot_{\mathcal{C}}\) to \(F(\bot_{\mathcal{C}})\).
   Assuming now the inductive hypothesis for \(n \in \mathbb{N}\)
   \begin{align*}
-    F^n(u) &\in \hom(F^n(U),F^{n+1}(U))
+    F^n(\bot_{F(\bot)}) &\in \hom(F^n(\bot_{\mathcal{C}}),F^{n+1}(\bot_{\mathcal{C}}))
     \intertext{we can see that}
-    F(F^n(u)) = F^{n+1}(u) &\in \hom(F^{n+1}(U),F^{(n+1)+1}(U)),
+    F(F^n(\bot_{F(\bot)})) = F^{n+1}(\bot_{F(\bot)}) &\in \hom(F^{n+1}(\bot_{\mathcal{C}}),F^{(n+1)+1}(\bot_{\mathcal{C}})),
   \end{align*}
   and this makes the induction step proved.
   
   Now, let \((A,\lbrace \mu_n \rbrace_{n\in\mathbb{N}})\) be a colimit of \(\Delta\). Then,
   \begin{enumerate}
-    \item \((A,\lbrace \mu_{n+1} \rbrace_{n\in\mathbb{N}})\) is a colimit of \(\lbrace (F^{n+1}(U), F^{n+1}(u))\rbrace_{n\in\mathbb{N}}\), and
-    \item \((F(A), \lbrace F(\mu_n) \rbrace_{n \in \mathbb{N}})\) is a colimit of \(\lbrace (F^{n+1}(U), F^{n+1}(u)) \rbrace_{n \in \mathbb{N}}\), because
+    \item \((A,\lbrace \mu_{n+1} \rbrace_{n\in\mathbb{N}})\) is a colimit of \(\lbrace (F^{n+1}(\bot_{\mathcal{C}}), F^{n+1}(\bot_{F(\bot)}))\rbrace_{n\in\mathbb{N}}\), and
+    \item \((F(A), \lbrace F(\mu_n) \rbrace_{n \in \mathbb{N}})\) is a colimit of \(\lbrace (F^{n+1}(\bot_{\mathcal{C}}), F^{n+1}(\bot_{F(\bot)})) \rbrace_{n \in \mathbb{N}}\), because
     \begin{equation*}
-      F(\mu_n) = F(\mu_{n+1} \circ F^n(u)) = F(\mu_{n+1}) \circ F^{n+1}(U).
+      F(\mu_n) = F(\mu_{n+1} \circ F^n(\bot_{F(\bot)})) = F(\mu_{n+1}) \circ F^{n+1}(\bot_{\mathcal{C}}).
     \end{equation*}
   \end{enumerate}
   Colimits are unique up to isomorphism, thus there exists a unique mediating isomorphism \(\alpha \colon F(A) \to A\), and the object \((A,\alpha)\) is a fixed point of the endofunctor \(F\).
   
   \paragraph{Initality of \((A,\alpha)\).} Let \((B,\beta)\) be another fixed point of \(F\).
-  Being \(B\) an object of \(\mathcal{C}\), there exists a unique morphism \(\nu_0 \colon U \to B\).
+  Being \(B\) an object of \(\mathcal{C}\), there exists a unique morphism \(\nu_0 \colon \bot_{\mathcal{C}} \to B\).
   For \(n \in \mathbb{N}\), we define \(\nu_{n+1} := \beta \circ F(\nu_n)\).
   Then, \((B,\lbrace \nu_n \rbrace_{n \in \mathbb{N}})\) is a co-cone for \(\Delta\). We show this to be true by induction on \(n \in \mathbb{N}\):
   \begin{description}
     \item[Basis case]
     \begin{equation}
-      \nu_1 \circ F^0(u) = \beta \circ F(\nu_0) \circ u = \nu_0,
+      \nu_1 \circ F^0(\bot_{F(\bot)}) = \beta \circ F(\nu_0) \circ \bot_{F(\bot)} = \nu_0,
     \end{equation}
     thanks to the commutativity of the diagram~\ref{02:diagram-2}:
     \begin{figure}[!ht]
       \begin{center}
         \begin{tikzcd}
-          U \arrow[r, "u"] \arrow[rrr, "\nu_0", bend right=30]
-          & F(U) \arrow[r, "F(\nu_0)"]
+          \bot_{\mathcal{C}} \arrow[r, "\bot_{F(\bot)}"] \arrow[rrr, "\nu_0", bend right=30]
+          & F(\bot_{\mathcal{C}}) \arrow[r, "F(\nu_0)"]
           & F(B) \arrow[r, "\beta"]
           & B
         \end{tikzcd}
       \end{center}
-      \caption{Both \(\beta \circ F(\nu_0) \circ u\) and \(\nu_0\) are morphisms from \(U\) to \(B\): being \(U\) initial, there is a unique arrow from \(U\) to \(B\), thus the equality of the morphisms.}
+      \caption{Both \(\beta \circ F(\nu_0) \circ \bot_{F(\bot)}\) and \(\nu_0\) are morphisms from \(\bot_{\mathcal{C}}\) to \(B\): being \(\bot_{\mathcal{C}}\) initial, there is a unique arrow from \(\bot_{\mathcal{C}}\) to \(B\), thus the equality of the morphisms.}
       \label{02:diagram-2}
     \end{figure}
-    \item[Induction step] Assuming that \(\nu_n = \nu_{n+1} \circ F^n(u)\) holds for \(n \in \mathbb{N}\), we obtain
+    \item[Induction step] Assuming that \(\nu_n = \nu_{n+1} \circ F^n(\bot_{F(\bot)})\) holds for \(n \in \mathbb{N}\), we obtain
     \begin{equation*}
       \begin{split}
-        \nu_{(n+1)+1} \circ F^{n+1}(U) &=
-        \beta \circ F(\nu_{n+1}) \circ F^{n+1}(U)
-        = \beta \circ F(\nu_{n+1} \circ F^n(U)) \\
+        \nu_{(n+1)+1} \circ F^{n+1}(\bot_{\mathcal{C}}) &=
+        \beta \circ F(\nu_{n+1}) \circ F^{n+1}(\bot_{\mathcal{C}})
+        = \beta \circ F(\nu_{n+1} \circ F^n(\bot_{\mathcal{C}})) \\
         &= \beta \circ F(\nu_n) = \nu_{n+1}.
       \end{split}
     \end{equation*}
@@ -124,14 +180,14 @@
   \begin{figure}[!ht]
     \begin{center}
       \begin{tikzcd}
-        U \arrow[r, "\mu_0"] \arrow[rrrr, "\nu_0", bend right=30]
+        \bot_{\mathcal{C}} \arrow[r, "\mu_0"] \arrow[rrrr, "\nu_0", bend right=30]
         & A \arrow[r, "\alpha^{-1}"]
         & F(A) \arrow[r, "F(\xi)"]
         & F(B) \arrow[r, "\beta"]
         & B
       \end{tikzcd}
     \end{center}
-    \caption{Thanks to the initiality of \(U\), the illustrated diagram commutes.}
+    \caption{Thanks to the initiality of \(\bot_{\mathcal{C}}\), the illustrated diagram commutes.}
     \label{02:diagram-3}
   \end{figure}
   
