@@ -51,6 +51,43 @@ The initial object of a category is unique up to isomorphism. Indeed, let \(\bot
 \end{center}
 assuming that \(f \colon \bot_{\mathcal{C}} \to \bot_{\mathcal{C}}^\prime\) and \(g \colon \bot_{\mathcal{C}}^\prime \to \bot_{\mathcal{C}}\).
 
+\begin{dfn}\label{dfn:omega-chain}
+  An \emph{\(\omega\)--chain} in a category \(\mathcal{C}\) is a sequence
+  \(\lbrace (D_i,f_i) \rbrace_{i \in \mathbb{N}}\) satisfying the conditions
+  \begin{equation*}
+    \lbrace D_i \rbrace_{i \in \mathbb{N}} \subseteq \obj{\mathcal{C}} \quad
+    \text{and} \quad f_i \colon D_i \to D_{i+1}, i \in \mathbb{N}.
+  \end{equation*}
+  Diagrammatically, an \(\omega\)--chain is represented as
+  \begin{center}
+    \begin{tikzcd}
+      D_0 \arrow[r, "f_0"] &
+      D_1 \arrow[r, "f_1"] &
+      \dotsc \arrow[r, "f_{n-1}"] &
+      D_n \arrow[r, "f_n"] &
+      D_{n+1} \arrow[r, "f_{n+1}"] &
+      \dotsc
+    \end{tikzcd}
+  \end{center}
+  % I think we don't need omega-op--chain definition.
+\end{dfn}
+
+\begin{dfn}\label{dfn:co-cone}
+  Let \(\Delta\) be an \(\omega\)--chain in \(\mathcal{C}\), as defined in Definition~\ref{dfn:omega-chain}.
+  A \emph{co-cone} for \(\Delta\) is a tuple \((D,\lbrace \delta_i \rbrace_{i \in \mathbb{N}})\) consisting of a \(\mathcal{C}\)--object \(D\) and, for \(i \in \mathbb{N}\), \(\delta_i \colon D_i \to D\) such that the diagram
+  \begin{center}
+    \begin{tikzcd}%[row sep=large, column sep=small, cramped]
+      D_0 \arrow[r, "f_0"] \arrow[drr, "\delta_0" description]
+      & D_1 \arrow[r, "f_1"] \arrow[dr, "\delta_1" description]
+      & \dotsc \arrow[r] 
+      & D_n \arrow[r, "f_n"] \arrow[dl, "\delta_i" description]
+      & D_{n+1} \arrow[dll, "\delta_{n+1}" description] \arrow[r, "f_{n+1}"] & \dotsc \\
+      & & D & & &
+    \end{tikzcd}
+  \end{center}
+  commutes, i.e. \(\delta_i = \delta_{i+1} \circ f_i\) for all \(i \in \mathbb{N}\).
+\end{dfn}
+
 \begin{dfn}
   Let \(\mathcal{C}\) be a category and \(F\) be an endofunctor on \(\mathcal{C}\).
   Then, a \emph{prefixed point} of \(F\) --- also called an \(F\)-algebra --- is a pair \((A,\alpha)\) where \(A\) is an object of \(\mathcal{C}\) and \(\alpha \colon F(A) \to A\) a morphism of \(\mathcal{C}\); a \emph{fixed point} of \(F\) is a prefixed point where \(\alpha \colon F(A) \simeq A\) is an isomorphism.
