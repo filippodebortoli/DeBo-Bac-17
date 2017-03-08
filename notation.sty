@@ -1,5 +1,6 @@
 \DeclareMathOperator{\pfp}{\textsc{pfp}}
 \DeclareMathOperator{\fp}{\textsc{fp}}
+\DeclareMathOperator{\fix}{fix}
 \newcommand{\id}[1]{\mathrm{id}_{#1}}
 \newcommand{\obj}[1]{\lvert #1 \rvert}
 
@@ -12,3 +13,12 @@
 
 \theoremstyle{remark}
 \newtheorem{rem}{Remark}
+
+\providecommand{\bigsqcap}{%
+  \mathop{%
+    \mathpalette\@updown\bigsqcup
+  }%
+}
+\newcommand*{\@updown}[2]{%
+  \rotatebox[origin=c]{180}{$\m@th#1#2$}%
+}
