@@ -5,6 +5,7 @@
 \documentclass[draft,titlepage]{article}
 
 %%% Font and language-related packages. %%%
+\usepackage[a-1b]{pdfx} % needed to obtain pdf/A-1.
 \usepackage[english]{babel}
 \usepackage[OT1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -13,7 +14,7 @@
 \usepackage[euler-digits]{eulervm}
 
 %%% Document-related packages. %%%
-\usepackage{frontespizio}
+\usepackage[nowrite,signatures]{frontespizio}
 \usepackage[]{geometry}
 \usepackage{microtype}
 
@@ -41,15 +42,19 @@
   \begin{frontespizio}
     \Preambolo{\usepackage[sc,osf]{mathpazo}}
     \Universita{Trento}
-    \Facolta{Scienze Matematiche, Fisiche e Naturali}
+    %\Facolta{Scienze Matematiche, Fisiche e Naturali}
+    \Dipartimento{Matematica}
     \Corso[Laurea]{Matematica}
     \Titoletto{Tesi di laurea}
     \Titolo{Recursive domain equations:\\
     a categorical perspective}
     \Candidato[166041]{Filippo De Bortoli}
+    \NRelatore{Supervisore}{Supervisori}
     \Relatore{Roberto Zunino}
     \Annoaccademico{2016--2017}
   \end{frontespizio}
+  
+  \include{abstract}
 
   \tableofcontents
 
