@@ -1,6 +1,6 @@
 \section{Fixed point theory for categories}
 
-\subsection{Preliminary notions}
+\subsection{From posets to categories}
 
 \begin{dfn}
   A \emph{category} \(\mathcal{C}\) consists of a class \(\obj{\mathcal{C}}\), called the \emph{objects} of \(\mathcal{C}\), and for all \(A\), \(B\), \(C\) in \(\obj{\mathcal{C}}\):
@@ -86,6 +86,38 @@ assuming that \(f \colon \bot_{\mathcal{C}} \to \bot_{\mathcal{C}}^\prime\) and 
     \end{tikzcd}
   \end{center}
   commutes, i.e. \(\delta_i = \delta_{i+1} \circ f_i\) for all \(i \in \mathbb{N}\).
+\end{dfn}
+
+\begin{dfn}
+  Let \(\Delta\) be an \(\omega\)--chain in a category \(\mathcal{C}\).
+  Then, a \emph{colimit} of \(\Delta\) is an initial object of the category \(U(\Delta)\) which objects are the co--cones for \(\Delta\) and hom--sets are defined as
+  \begin{equation}
+    \hom((A,\alpha),(B,\beta)) := \lbrace f \colon A \to B \mid
+    \forall n \in \mathbb{N}.\,\beta_n = \alpha_n \circ f \rbrace.
+  \end{equation}
+  If \((A,\alpha)\) is a colimit of \(\Delta\), the unique morphism from it to another co--cone \((B,\beta)\) in \(U(\Delta)\) is called a \emph{mediating} morphism.
+\end{dfn}
+
+\begin{dfn}
+  An \emph{\(\omega\)--category} is a category with an initial object, in which each \(\omega\)--chain has a colimit. 
+\end{dfn}
+
+\subsection{Functors and fixed points}
+
+\begin{dfn}
+  A \emph{functor} from the category \(\mathcal{C}\) to the category \(\mathcal{L}\) consists of
+  \begin{enumerate}
+    \item a map \(\obj{\mathcal{C}} \to \obj{\mathcal{L}}\),
+    \item for all \(A, B \in \obj{\mathcal{C}}\), a map \(\hom(A,B) \to \hom(F(A),F(B))\) that preserves identity and composition, thus
+      if \(g \circ f\) is defined in \(\mathcal{C}\), then
+            \(F(g \circ f) = F(g) \circ F(f)\), and
+            \(F(\id{A}) = \id{F(A)}\).
+  \end{enumerate}
+\end{dfn}
+
+\begin{dfn}
+  A functor \(F \colon \mathcal{C} \to \mathcal{L}\) is \emph{\(\omega\)--cocontinuous} --- \emph{continuous} from here on (?!?) --- if and only if it preserves colimits: thus, given an \(\omega\)--chain
+  \(\lbrace (D_i,f_i) \rbrace_{i \in \mathbb{N}}\) in \(\mathcal{C}\) with colimit \((D,\delta)\), the tuple \((F(D),F(\delta))\) is a colimit for the \(\omega\)--chain \(\lbrace (F(D_i),F(f_i)) \rbrace_{i \in \mathbb{N}}\) in \(\mathcal{L}\).
 \end{dfn}
 
 \begin{dfn}

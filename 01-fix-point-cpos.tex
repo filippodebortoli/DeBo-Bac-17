@@ -39,3 +39,59 @@ elements of a poset.
   \]
 \end{dfn}
 
+\begin{dfn}
+  Given an endofunction \(f\) on the poset \((C,<)\), \(x \in C\) is a \emph{prefixed} point of \(f\) if \(f(x) < x\), and it is the \emph{least prefixed point} if \(x < y\) for each \(y\) prefixed point of \(f\).
+  Similarly, a \emph{fixed} point of \(f\) is an element \(x \in C\) such that \(f(x) = x\); it is the \emph{least fixed point} if \(x < y\) for each \(y\) fixed point of \(f\).
+\end{dfn}
+
+\begin{lem}
+  Let \(f\) be a monotonic endofunction on a poset \((C,\le)\).
+  Then, the least prefixed point of \(f\) is also its least fixed point.
+\end{lem}
+\begin{proof}
+  Being \(f\) monotonic, assuming that \(x \in C\) is its least prefixed point, we can derive that
+  \begin{equation*}
+    f(x) \le x \implies f(f(x)) \le f(x),
+  \end{equation*}
+  so \(f(x)\) is also a prefixed point of \(f\).
+  Then, it follows that \(x \le f(x)\) and consequently \(x = f(x)\), i.e \(x\) is a fixed point of \(f\).
+  Moreover, it is also the least fixed point, because every fixed point is also a prefixed point of \(f\), and \(x\) is assumed to be the least prefixed point of \(f\).  
+\end{proof}
+
+\begin{thm}[Knaster--Tarski]
+  If \(f\) is a monotonic function, then it has a least fixed point.
+\end{thm}
+\begin{proof}[Da rivedere]
+  Let \(\mathcal{F}\) be the set of prefixed points of \(f\), and let \(x = \bigsqcap\mathcal{F}\). Then \(x \sqsubseteq \bigsqcap\mathcal{F}\), and, thanks to monotonicity,
+  \begin{equation*}
+    \left(\forall y \in \mathcal{F}.\, x \sqsubseteq y\right) \implies \forall y \in \mathcal{F}.\,f(x) \sqsubseteq f(y)
+  \end{equation*}
+  Moreover, being each \(y \in \mathcal{F}\) itself a prefixed point, it follows that \(f(x) \sqsubseteq y\), thus \(f(x) \sqsubseteq \cap\mathcal{F}\).
+  Finally, we conclude that \(f(x) \sqsubseteq x\), i.e. \(x\) is the least prefixed point of \(f\).
+\end{proof}
+
+\begin{thm}[Kleene]
+  Let \(f\) be a Scott--continuous endofunction on a complete lattice \((C,\sqsubseteq)\) --- i.e. \((C,\sqsubseteq)\) is a poset in which every subset of \(C\) has a least upper bound in \(C\). Then, \(\lbrace f^n(\bot) \rbrace_{n \in \mathbb{N}}\) is an ascending \(\omega\)--chain and
+  \begin{equation}
+    \fix(f) = \bigsqcup_{n \in \mathbb{N}} f^n(\bot)
+  \end{equation}
+  is the least fixed point of \(f\).
+\end{thm}
+\begin{proof}
+  We begin by proving that \(\lbrace f^n(\bot) \rbrace_{n \in \mathbb{N}}\) is indeed an ascending \(\omega\)--chain, showing by induction on \(n \in \mathbb{N}\) that \(f^n(\bot) \sqsubseteq f^{n+1}(\bot)\).
+  \begin{description}
+    \item[Induction basis] for \(n = 0\), \(\bot = f^0(\bot) \sqsubseteq f^1(\bot) = f(\bot)\) vacuously holds, since \(\bot\) is the least element of \(C\).
+    \item[Induction step] assuming that \(f^n(\bot) \sqsubseteq f^{n+1}(\bot)\) holds for \(n \in \mathbb{N}\), we obtain that
+    \begin{equation*}
+      \begin{split}
+        f^n(\bot) \sqsubseteq f^{n+1}(\bot) &\implies
+        f(f^n(\bot)) \sqsubseteq f(f^{n+1}(\bot)) \\
+        &\implies
+        f^{n+1}(\bot) \sqsubseteq f^{(n+1)+1}(\bot),
+      \end{split}
+    \end{equation*}
+    since \(f\) is monotonic.
+  \end{description}
+  
+  Now, (proseguiamo un'altra volta!)
+\end{proof}
