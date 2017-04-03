@@ -1,18 +1,23 @@
 \section[Fixed point theory for cpos]%
 {Fixed point theory for complete partial orders}
 
+% Further explanations: Winskel, p.72.
 Before getting our hands dirty with category theory, it would be appropriate to
 introduce the well-established framework for the solution of recursive domain
 equations based on complete partial orders.
 These structures, along with continuous functions over them, allow us to properly treat the foundational aspects of denotational semantics.
 
-\subsection[]{Complete partial orders}
+\subsection[Complete partial orders]{Complete partial orders}
 
-A \emph{partially ordered} set, or \emph{poset}, consists of a set endowed with
-a reflexive, antisymmetric and transitive binary relation. Typical examples of posets are numerical sets enriched with the usual order relation, or the power set of a given set, with the inclusion relation.
+A \emph{partially ordered} set, or \emph{poset}, consists of a set endowed with a reflexive, antisymmetric and transitive binary relation.
+Typical examples of posets are:
+\begin{itemize}
+  \item numerical sets, endowed with the standard order relation;
+  \item given a set \(X\), the power set \(2^X\) with the inclusion relation.
+\end{itemize}
 In domain theory, one usually refers to the \emph{information ordering}, denoted with the symbol \({}\sqsubseteq{}\), which sorts out the elements of a set by the amount of information they convey.
 
-Taking the investigation further, it would also be desirable to model steps of consequent computations, where each new objet brings additional information with respect to the previous one.
+Taking the investigation further, it would also be desirable to model steps of consequent computations, where each new object carries more information than the previous one.
 In a partial order \((D, {}\sqsubseteq)\), this can be represented with an
 \emph{ascending \(\omega\)--chain}, which is an increasing sequence
 \begin{equation*}
@@ -29,7 +34,7 @@ Those requirements, essential to succeed in the modelling of meaning domains, le
   \(\bot\), called the \emph{bottom}.
 \end{dfn}
 
-\subsection[]{Continuous functions}
+\subsection[Continuous functions]{Continuous functions}
 
 The first criterium to be rispected in the construction of a theoretical model for the description of programs written in a certain programming language is that
 \begin{displayquote}
@@ -38,7 +43,7 @@ The first criterium to be rispected in the construction of a theoretical model f
 How can this be obtained? In mathematical terms, the notion of \emph{monotonic} functions is introduced, namely functions of posets%
 \(f \colon (D_1,{}\sqsubseteq_1) \to (D_2,{}\sqsubseteq_2)\) such that
 \begin{equation*}
-  \forall{}x,y \in D_1.\,\, x \sqsubseteq_1 y \implies f(x) \sqsubseteq_2 f(y).
+  \forall{}x,y \in D_1.\; x \sqsubseteq_1 y \implies f(x) \sqsubseteq_2 f(y).
 \end{equation*}
 Moreover, it is important that programs do behave in a (somehow) predictable way: going on with the computations, one would like to come to a conclusion.
 This justifies the following definition.
@@ -51,7 +56,7 @@ This justifies the following definition.
   hold for each ascending \(\omega\)--chain \(\lbrace d_n \rbrace_{n \in \mathbb{N}} \subseteq D_1\).
 \end{dfn}
 
-\subsection[]{Least fixed points and recursion}
+\subsection[Fixed points]{Least fixed points and recursion}
 
 Now that we've defined which structures underlie our mathematical framework, it is time to see how a formal foundation of denotational semantics is given, supporting both recursive programs and recursive data types, defined as least
 fixed points of continuous functions over a complete partial order.
@@ -59,7 +64,7 @@ To back this claim up, we are going to state some fundamental results in the fie
 
 \begin{lem}[least (pre)fixed point lemma]\label{lem:cpo-prefixed}
   Let \(f\) be a monotonic function from a poset \(D\) to itself.
-  Then, if ti exists, the least prefixed point of \(f\) is also its least fixed point.
+  Then, if it exists, the least prefixed point of \(f\) is also its least fixed point.
 \end{lem}
 
 \begin{thm}[Fixed point theorem]\label{thm:cpo-fixed}
