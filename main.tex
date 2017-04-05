@@ -1,11 +1,11 @@
 % arara: frontespizio
 % arara: biber
-% arara: pdflatex
+% arara: pdflatex: {draft: yes}
 % arara: lmkclean
 \documentclass[draft,titlepage]{article}
 
 %%% Font and language-related packages. %%%
-\usepackage[a-1b]{pdfx} % needed to obtain pdf/A-1.
+\usepackage[a-1b]{pdfx} % needed to get pdf/A-1.
 \usepackage[english]{babel}
 \usepackage[OT1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -15,7 +15,7 @@
 
 %%% Document-related packages. %%%
 \usepackage[nowrite,signatures]{frontespizio}
-\usepackage[]{geometry}
+%\usepackage[]{geometry}
 \usepackage{microtype}
 
 %%% Math-related packages. %%%
@@ -64,6 +64,7 @@
   \include{01-fix-point-cpos}
   \include{02-fix-point-cat}
   \include{03-proj-pairs}
+  \include{04-duality-O-cats}
   \printbibliography
 
 \end{document}

@@ -15,7 +15,7 @@ Typical examples of posets are:
   \item numerical sets, endowed with the standard order relation;
   \item given a set \(X\), the power set \(2^X\) with the inclusion relation.
 \end{itemize}
-In domain theory, one usually refers to the \emph{information ordering}, denoted with the symbol \({}\sqsubseteq{}\), which sorts out the elements of a set by the amount of information they convey.
+In domain theory, we can visualize the elements of a partial order as points of information; thus, we can consider the \emph{information ordering}, denoted with the symbol ``\(\sqsubseteq\)'', which sorts out the points of a poset by the amount of information they convey.
 
 Taking the investigation further, it would also be desirable to model steps of consequent computations, where each new object carries more information than the previous one.
 In a partial order \((D, {}\sqsubseteq)\), this can be represented with an
@@ -66,6 +66,15 @@ To back this claim up, we are going to state some fundamental results in the fie
   Let \(f\) be a monotonic function from a poset \(D\) to itself.
   Then, if it exists, the least prefixed point of \(f\) is also its least fixed point.
 \end{lem}
+\begin{proof}
+  First, if we assume that \(x\) is the least prefixed point of \(f\), then \(f(x)\) is also a prefixed point of \(f\), since \(f\) is monotonic:
+  \begin{equation*}
+    f(x) \sqsubseteq x \implies f(f(x)) \sqsubseteq f(x).
+  \end{equation*}
+  Moreover, we can also say that \(x \sqsubseteq f(x)\), being \(x\) the least element of the set of prefixed points of \(f\).
+  Hence, \(x\) is a fixed point of \(f\).
+  Last, we notice that each fixed point of \(f\) is also prefixed, so \(x\) is also the least fixed point of \(f\).\qedhere
+\end{proof}
 
 \begin{thm}[Fixed point theorem]\label{thm:cpo-fixed}
   Let \(f\) be a continuous function from an \(\omega\)--cpo \(D\) to itself.
