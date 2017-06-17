@@ -155,14 +155,20 @@ Conversely, if \((i,g)\) has an inverse \(\eta{}\), i.e. \((i,g) \circ \eta = (1
 this, jointly with \(i \circ g \sqsubseteq 1_D\), leads to \(i \circ g = 1_D\).
 
 \begin{thm}[Initiality theorem]\label{thm:3-2}
-  Let \(\mathcal{C}\) be a localized \(\mathbf{O}\)--category, \(\Delta{}\) an \(\omega{}\)--chain in \(\mathcal{C}^\textup{E}\) and \((D,\alpha)\) a cocone for \(\Delta{}\). The following are equivalent:
+  Let \(\mathcal{C}\) be a localized \(\mathbf{O}\)--category, \(\Delta := {\langle(D_i,f_i)\rangle}_{n \in \mathbb{N}}\) an \(\omega{}\)--chain in \(\mathcal{C}^\textup{E}\) and \((D,\alpha)\) a cocone for \(\Delta{}\). The following are equivalent:
   \begin{enumerate}
     \item \((D,\alpha)\) is a \(\Delta{}\)--colimit;
     \item \(\bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star) = 1_D\).
   \end{enumerate}
 \end{thm}
 \begin{proof}
-  Again, to be seen later.
+  Let \(E \in \obj{\mathcal{C}}\) and \(g \in \mathcal{C}^\textup{E}(E,D)\) such that \(\bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star) = g \circ g^\star\).
+  To prove that \(g \circ g^\star = 1_D\), we should proceed in the following way:
+  \begin{enumerate}
+    \item By defining, for all \(n \in \mathbb{N}\), the morphism \(\beta_n := g \circ \alpha_n\), we should verify that \(\beta_n\) is indeed an embedding from \(D_n\) to \(E\) and that \((E,\beta)\) is a \(\Delta\)--cocone.
+    \item After that, we should notice that the mediating morphism \(\eta \colon D \to E\) is the inverse of \(g\), i.e. \(g \circ \eta = 1_D\).
+    This allows us to conclude that \(g \circ g^\star = 1_D\).
+  \end{enumerate}
 \end{proof}
 
 To test whether an \(\mathbf{O}\)--category is localized, it would be desirable to have a simpler criterion. This can be obtained, thanks to idempotents and splits. Let \(\mathcal{C}\) be a category and \(f \colon D \to D\) an arrow, with \(D \in \obj{\mathcal{C}}\). Then, \(f\) is called an \emph{idempotent} when \(f \circ f = f\); it is called \emph{split} when there exists another object \(E\) and morphisms \(g \colon D \to E\), \(h \colon E \to D\) such that \(f = h \circ g\) and \(g \circ h = 1_E\).
@@ -236,45 +242,61 @@ Examples of locally continuous functors are the identity and the projection func
 
 An immediate and importance consequence of this reasoning is contained in the following result.
 
-\begin{thm}[Continuity theorem]
+\begin{thm}[Continuity theorem]\label{thm:cont}
   Let \(\mathcal{C}\), \(\mathcal{L}\) be \(\mathbf{O}\)--categories and \(F \colon \mathcal{C} \to \mathcal{L}\) a locally continuous functor.
   Suppose that \(\mathcal{C}\) is localized.
   Then, \(F^\textup{E} \colon \mathcal{C}^\textup{E} \to \mathcal{L}^\textup{E}\) is \(\omega{}\)--cocontinuous.
 \end{thm}
 
-\subsection{Solution of a fixed point equation}
+\subsection{Solution of \(D \simeq F(D)\)}
 
-Let \(F\) be a locally continuous endofunctor over a localized \(\mathbf{O}\)--category \(\mathcal{C}\).
-In addition, suppose that \(\mathcal{C}^\textup{E}\) is an \(\omega{}\)--category, with initial object \(\bot{}\).
-Then, the following hold:
-\begin{enumerate}
-  \item \(F^\textup{E}\) is an \(\omega{}\)--cocontinuous endofunctor over \(\mathcal{C}^\textup{E}\);
-  \item \(F^\textup{E}\) has an initial fixed point \((A,\alpha)\), where \(\alpha \colon FA \to A\) is iso in \(\mathcal{C}^\textup{E}\);
-  \item \((A, \lbrace \mu_n \colon F^n\bot \to A \rbrace_{n \in \mathbb{N}^\star})\) is a colimit for a certain \(\omega{}\)--chain \(\Delta{}\) in \(\mathcal{C}^\textup{E}\);\footnote{Remember that \(F^\textup{E}\bot = F\bot{}\).}
-  \item By functoriality of \(F^\textup{E}\), also \((FA, \lbrace F^\textup{E}\mu_{n-1} \colon F^n\bot \to A \rbrace_{n \in \mathbb{N}^\star})\) is a \(\Delta{}\)--colimit.
-\end{enumerate}
-Since \((A,\mu)\) is a \(\Delta{}\)--colimit, the initiality theorem implies
+As an application of the results seen so far, we are now ready to construct a canonical solution to a recursive domain equation.
+For instance, suppose that we want to solve the equation \(D \simeq F(D)\), where \(D\) is a categorical object in \(\mathcal{C}\) and \(F\) is an endofunctor over \(\mathcal{C}\).
+
+If we require \(F\) to be a locally continuous endofunctor and \(\mathcal{C}\) to be a localized \(\mathbf{O}\)--category, thanks to Theorem~\ref{thm:cont}, it is possible to induce an \(\omega\)--cocontinuous endofunctor \(F^\textup{E}\) over \(\mathcal{C}^\textup{E}\).
+If we additionally assume that \(\mathcal{C}^\textup{E}\) is \(\omega\)--cocomplete, with an initial object \(\bot\), by the initial fixed point theorem, there exists an initial fixed point \(\fix := (A,\alpha)\), where \(\alpha \in \mathcal{C}^\textup{E}(F(A), A)\) is an isomorphism.
+
+\paragraph{Expliciting the isomorphism.}
+Recalling the details of Theorem~\ref{thm:init},
 \begin{equation*}
-  \bigsqcup_{n \in \mathbb{N}^\star}(\mu_n \circ \mu_n^\star) = 1_A.
+  \Delta := {\langle(F^n(\bot),F^n(!))\rangle}_{n \in \mathbb{N}}
 \end{equation*}
-Moreover, the mediating morphism from \(A\) to \(FA\) is given by
+is an \(\omega\)--chain in \(\mathcal{C}^\textup{E}\) and there exists a \(\Delta\)--colimit \((A, {\langle \mu_n \colon F^n(\bot) \to A \rangle}_{n \ge 1})\); moreover, another \(\Delta\)--colimit is given by \((F^\textup{E}(A), {\langle F^\textup{E}(\mu_{n-1}) \colon F^n(\bot) \to A \rangle}_{n \ge 1})\).
+
+The initiality theorem~\ref{thm:3-2} ensures that \(\bigsqcup_{n \ge 1}(\mu_n \circ \mu_n^\star) = 1_A\), while Theorem~\ref{thm:3-1} provides an isomorphism from \(A\) to \(F(A)\) as
 \begin{equation*}
-  f := \bigsqcup_{n \in \mathbb{N}^\star}(F^\textup{E}\mu_{n-1} \circ \mu_n^\star).
+  f := \bigsqcup_{n \in \mathbb{N}}(F^\textup{E}(\mu_{n-1}) \circ \mu_n^\star).
+\end{equation*}
+% In addition, suppose that \(\mathcal{C}^\textup{E}\) is an \(\omega{}\)--category, with initial object \(\bot{}\).
+% Then, the following hold:
+% \begin{enumerate}
+%   \item \(F^\textup{E}\) is an \(\omega{}\)--cocontinuous endofunctor over \(\mathcal{C}^\textup{E}\);
+%   \item \(F^\textup{E}\) has an initial fixed point \((A,\alpha)\), where \(\alpha \colon FA \to A\) is iso in \(\mathcal{C}^\textup{E}\);
+%   \item \((A, \lbrace \mu_n \colon F^n\bot \to A \rbrace_{n \in \mathbb{N}^\star})\) is a colimit for a certain \(\omega{}\)--chain \(\Delta{}\) in \(\mathcal{C}^\textup{E}\);\footnote{Remember that \(F^\textup{E}\bot = F\bot{}\).}
+%   \item By functoriality of \(F^\textup{E}\), also \((FA, \lbrace F^\textup{E}\mu_{n-1} \colon F^n\bot \to A \rbrace_{n \in \mathbb{N}^\star})\) is a \(\Delta{}\)--colimit.
+% \end{enumerate}
+% Since \((A,\mu)\) is a \(\Delta{}\)--colimit, the initiality theorem implies
+% \begin{equation*}
+%   \bigsqcup_{n \in \mathbb{N}^\star}(\mu_n \circ \mu_n^\star) = 1_A.
+% \end{equation*}
+% Moreover, the mediating morphism from \(A\) to \(FA\) is given by
+% \begin{equation*}
+%   f := \bigsqcup_{n \in \mathbb{N}^\star}(F^\textup{E}\mu_{n-1} \circ \mu_n^\star).
   % \left(\bigsqcup_{n \in \mathbb{N}^\star}(F^\textup{E}\mu_{n-1} \circ \mu_n^\star),\bigsqcup_{n \in \mathbb{N}^\star}(\mu_n \circ F(\mu_{n-1}^\star))\right).% = \left(\bigsqcup_{n \in \mathbb{N}^\star}(F^\textup{E}\mu_{n-1} \circ \mu_n^\star), \bigsqcup_{n \in \mathbb{N}^\star}(\mu_n \circ F(\mu_{n-1}^\star))\right)
-\end{equation*}
+% \end{equation*}
 
-\begin{center}
-  \begin{tikzcd}
-    \bot \arrow[r, "!"] &%chktex 18
-    F\bot \arrow[r, "F!"] &%chktex 18
-    \dots \arrow[r] &
-    F^n\bot \arrow[rr, "F^n!"]%chktex 18
-        \arrow[dr, "\mu_n" description]%chktex 18
-        \arrow[ddr, "F^\textup{E}\mu_n" description] & &%chktex 18
-    F^{n+1} \arrow[r]%
-            \arrow[dl, "\mu_{n+1}" description]%chktex 18
-            \arrow[ddl, "F^\textup{E}\mu_{n+1}" description] & \dots{}\\%chktex 18
-    & & & & A \arrow[d, "{f}" description]& \\%chktex 18
-    & & & & FA &
-  \end{tikzcd}
-\end{center}
+% \begin{center}
+%   \begin{tikzcd}
+%     \bot \arrow[r, "!"] &%chktex 18
+%     F\bot \arrow[r, "F!"] &%chktex 18
+%     \dots \arrow[r] &
+%     F^n\bot \arrow[rr, "F^n!"]%chktex 18
+%         \arrow[dr, "\mu_n" description]%chktex 18
+%         \arrow[ddr, "F^\textup{E}\mu_n" description] & &%chktex 18
+%     F^{n+1} \arrow[r]%
+%             \arrow[dl, "\mu_{n+1}" description]%chktex 18
+%             \arrow[ddl, "F^\textup{E}\mu_{n+1}" description] & \dots{}\\%chktex 18
+%     & & & & A \arrow[d, "{f}" description]& \\%chktex 18
+%     & & & & FA &
+%   \end{tikzcd}
+% \end{center}
