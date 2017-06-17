@@ -1,7 +1,7 @@
-% arara: frontespizio
-% arara: biber
+%! arara: frontespizio
+%! arara: biber
 % arara: pdflatex: {draft: yes}
-% arara: lmkclean
+%! arara: lmkclean
 \documentclass[draft,titlepage]{article}
 
 %%% Font and language-related packages. %%%
@@ -30,14 +30,27 @@
 
 %%% Graphics-related packages. %%%
 \usepackage{tikz}
-\usetikzlibrary{cd}
+  \usetikzlibrary{cd}
+  %\usetikzlibrary{external}
+  %  \tikzsetexternalprefix{figures/}
+  %  \tikzexternalize%
 
 \usepackage[font={color=gray,small}, justification=centerlast, width=.75\textwidth]{caption}
 
+\usepackage{booktabs}
+
 %%% Other packages. %%%
 \usepackage{notation}
+\usepackage{noindentafter}
+%\usepackage{parskip}
 
-\includeonly{01-fix-point-cpos}
+\includeonly{%sections/frontespizio,%
+         sections/abstract,%
+         sections/00-introduction,%
+         sections/01-fix-point-cpos,%
+         sections/02-fix-point-cat,%
+         sections/03-proj-pairs,%
+         sections/04-duality-O-cats}
 
 \begin{document}
 
@@ -55,16 +68,20 @@
     \Relatore{Roberto Zunino}
     \Annoaccademico{2016--2017}
   \end{frontespizio}
-  
-  \include{abstract}
 
-  \tableofcontents
+  \include{sections/abstract}
 
-  \include{00-introduction}
-  \include{01-fix-point-cpos}
-  \include{02-fix-point-cat}
-  \include{03-proj-pairs}
-  \include{04-duality-O-cats}
-  \printbibliography
+  \tableofcontents%
+
+  \NoIndentAfterEnv{equation*}
+  \NoIndentAfterEnv{itemize}
+  \NoIndentAfterEnv{enumerate}
+
+  \include{sections/00-introduction}
+  \include{sections/01-fix-point-cpos}
+  \include{sections/02-fix-point-cat}
+  \include{sections/03-proj-pairs}
+  \include{sections/04-duality-O-cats}
+  \printbibliography%
 
 \end{document}

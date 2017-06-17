@@ -1,0 +1,154 @@
+\section{Useful constructions over \(\mathbf{O}\)-categories}
+
+In this final section, we are going to show how it is possible to construct new localized \(\mathbf{O}\)--categories, starting from given ones.
+Furthermore, we are going to illustrate one useful property of these categories, namely, how a covariant \(\omega\)--cocontinuous functor can be induced from a contravariant one. %chktex 21
+This, along with the exhibition of some locally continuous functors, concludes our inquiry into the field of recursive domain equations over categories.
+
+\subsection{Isomorphisms over localized \(\mathbf{O}\)--categories} %chktex 21
+
+A remarkable feature of \(\mathbf{O}\)--categories is that, restricting ourselves to the embeddings, an isomorphism between a category and its dual can be obtained.
+Perhaps, the most striking consequence is that, from every contravariant functor of \(\mathbf{O}\)--categories, a covariant functor can be induced when only embeddings are considered.
+
+\begin{prp}\label{iso:dual}
+  The dual of a localized \(O\)--category \(\mathcal{C}\) is a localized \(O\)--category itself.
+  Moreover, the functor
+  \(
+    S \colon \mathcal{C}^\textup{E} \to {(\mathcal{C}^\textup{op})}^\textup{E}
+  \),
+  acting as the identity over objects and mapping each embedding with the associated projection, is an isomorphism.
+\end{prp}
+\begin{proof}
+  Since every order-reversing duality preserves the features of the order, each morphism set in \(\mathcal{C}^\textup{op}\) is a poset in which ascending \(\omega\)--chains have lubs. %chktex 21
+  Given that, denoting by \(\circ\), resp. \(\bullet\), the composition over \(\mathcal{C}\), resp. \(\mathcal{C}^\textup{op}\), \(f \bullet g = g \circ f\) whenever the latter is defined for \(f\), \(g\) morphisms of \(\mathcal{C}\), we can assert that \(\mathcal{C}^\textup{op}\) is an \(\mathbf{O}\)--category. %chktex 21
+
+  In order to prove that \(\mathcal{C}^\textup{op}\) is localized, we first show that \(S\) is a functor and an isomorphism. Assuming that \(f\), \(g\) can be composed in \(\mathcal{C}^\textup{E}\),
+  \begin{equation*}
+    S(g \circ f) = {(g \circ f)}^\star = f^\star \circ g^\star = g^\star \bullet f^\star = S(g) \bullet S(f);
+  \end{equation*}
+  then, the conclusion is reached by observing that \({(\mathcal{C}^\textup{op})}^\textup{op} = \mathcal{C}\), which gives the inverse \(S^{-1} \colon {(\mathcal{C}^\textup{op})}^\textup{E} \to \mathcal{C}^\textup{E}\).
+
+  Finally, going back to~\ref{dfn:localized}, let \(f\) be an embedding in \(\mathcal{C}\) such that \(\bigsqcup_n(\alpha_n \circ \alpha_n^\star) = f \circ f^\star\). Then, %chktex 21
+  \begin{equation*}
+    \bigsqcup_n(\alpha_n \circ \alpha_n^\star) =
+    \bigsqcup_n(S(\alpha_n) \bullet S(\alpha_n^\star)) =
+    f^\star \bullet f = f \circ f^\star.
+  \end{equation*}
+  Being \((S(D),S(\alpha))\) a \(S(\Delta)\)--colimit and \(f^\star\) an embedding in \(\mathcal{C}^\textup{op}\), we have proved that \(\mathcal{C}^\textup{op}\) is localized. \qedhere %chktex 21
+\end{proof}
+
+We can additionally state that \({(\mathcal{C}^\textup{E})}^\textup{op}\) is isomorphic to \(\mathcal{C}^\textup{P}\).
+To see why this holds, let us consider an embedding \(f \in \mathcal{C}(A,B)\): then, it is also true that \(f \in \mathcal{C}^\textup{E}(A,B)\) and \(f \in {(\mathcal{C}^\textup{E})}^\textup{op}(B,A)\).
+Moreover, we can take the associated projection \(f^\star \in \mathcal{C}^\textup{P}(B,A)\) and conclude that
+\begin{equation*}
+  \begin{split}
+    S_{1} \colon {(\mathcal{C}^\textup{E})}^\textup{op} &\to \mathcal{C}^\textup{P} \\
+    A &\mapsto A \\ f &\mapsto f^\star
+  \end{split}
+\end{equation*}
+is a functor with inverse \(S_{1}^{-1}\) mapping each projection in \(\mathcal{C}^\textup{P}\) with the correspondent dual embedding in \({(\mathcal{C}^\textup{E})}^\textup{op}\).
+
+\begin{prp}\label{iso:prod}
+  If \(\mathcal{C}\) and \(\mathcal{L}\) are both localized \(\mathbf{O}\)--categories, then so is \(\mathcal{C} \times \mathcal{L}\).
+  Furthermore, the functor
+  \begin{equation*}
+    \begin{split}
+      F \colon {(\mathcal{C} \times \mathcal{L})}^\textup{E} &\to
+      \mathcal{C}^\textup{E} \times \mathcal{L}^\textup{E} \\
+      A &\mapsto A \\
+      f &\mapsto (\pi_1(f), \pi_2(f))
+    \end{split}
+  \end{equation*}
+  is an isomorphism.
+\end{prp}
+\begin{proof}
+  %\paragraph{\(\mathcal{C} \times \mathcal{L}\) is an \(\mathbf{O}\)--category.}
+  Defining
+  \(
+  (\mathcal{C} \times \mathcal{L})((A,A'), (B,B')) :=
+  \mathcal{C}(A,A') \times \mathcal{L}(B,B'),
+  \)
+  from the assumption that \(\mathcal{C}\) and \(\mathcal{L}\) are both \(\mathbf{O}\)--categories we can derive that their cartesian product is also such a category. This is achieved by endowing each morphism set with the coordinate--wise ordering. %chktex 8
+  Then, \((\mathcal{C} \times \mathcal{L})((A,A'), (B,B'))\) is a poset containing l.u.b's for each ascending chain, where composition is \(\omega\)--continuous. %chktex 21
+
+  %\paragraph{\({(\mathcal{C} \times \mathcal{L})}^\textup{E}\) and \(\mathcal{C}^\textup{E} \times \mathcal{L}^\textup{E}\) are isomorphic.}
+  Since projection functors are locally continuous, it is possible to take the induced functors \(\pi_1^\textup{E} \colon {(\mathcal{C} \times \mathcal{L})}^\textup{E} \to
+  \mathcal{C}^\textup{E}\) and \(\pi_2^\textup{E} \colon {(\mathcal{C} \times \mathcal{L})}^\textup{E} \to \mathcal{L}^\textup{E}\). Calling \(\Delta\) the diagonal functor over \({(\mathcal{C} \times \mathcal{L})}^\textup{E}\), defining \(F := (\pi_1^\textup{E} \times \pi_2^\textup{E}) \circ \Delta\) we obtain an isomorphism. %chktex 21
+
+  %\paragraph{Cartesian product of localized categories is localized.}
+  Let \(\Delta\) be an \(\omega\)--chain in \({(\mathcal{C} \times \mathcal{L})}^\textup{E}\) and \((D,\alpha)\) a \(\Delta\)--colimit. %chktex 21
+  Being \(\pi_1^\textup{E}\) \(\omega\)--cocontinuous, the pair \((\pi_1^\textup{E}(D),\pi_1^\textup{E}(\alpha))\) is a colimit for some \(\omega\)--chain in \(\mathcal{C}^\textup{E}\). %chktex 21
+  Moreover, thanks to \(\mathcal{C}\) being localized, there exist an embedding \(g_1\) such that \(\bigsqcup_{n \in \mathbb{N}}(\pi_1^\textup{E}(\alpha_n) \circ \pi_1^{\textup{E}\star}(\alpha_n)) = g_1 \circ g_1^\star\). %chktex 21
+  Then,
+  \begin{equation*}
+    \begin{split}
+      g_1 \circ g_1^\star &= \bigsqcup_{n \ge 0}(\pi_1^\textup{E}(\alpha_n) \circ {\pi_1^{\textup{E}}}^\star(\alpha_n))
+      = \bigsqcup_{n \ge 0}(\pi_1(\alpha_n\circ \alpha_n^\star)) \\
+      &= \pi_1\left(\bigsqcup_{n \ge 0}(\alpha_n\circ \alpha_n^\star)\right).
+    \end{split}
+    \end{equation*}
+  In a similar way, we obtain an embedding \(g_2\) in \(\mathcal{L}\) satisyfing those conditions.
+  Hence,
+  \begin{equation*}
+    \bigsqcup_{n \in \mathbb{N}}(\alpha_n\circ \alpha_n^\star)
+    = (g_1 \circ g_1^\star, g_2 \circ g_2^\star)
+    = (g_1,g_2) \circ (g_1^\star,g_2^\star)
+  \end{equation*}
+  thus \((g_1,g_2)\) is an embedding in \(\mathcal{C} \times \mathcal{L}\) and that category is localized. \qedhere
+\end{proof}
+
+\subsection{An example of a localized \(\mathbf{O}\)--category.}
+
+As shown in~\cite{Hemerik1988}, the category \textsc{cpo} of \(\omega\)--cpos and \(\omega\)--cocontinuous maps is a localized \(\mathbf{O}\)--category. %chktex 21
+Here, we will show how \textsc{cl}, the subcategory of \textsc{cpo} made by complete lattices and d--continuous maps, is also a localized \(\mathbf{O}\)--category. %chktex 8
+Moreover, we will observe that \(\mathrm{\textsc{cl}}^\textup{E}\) is \(\omega\)--cocomplete. %chktex 21
+
+\begin{dfn}
+  Let \(A\) and \(B\) be complete lattices.
+  A function \(f \colon A \to B\) is \emph{d--continuous} % chktex 8
+ if it is monotonic and, for each directed\footnote{A subset \(X\) of a poset is \emph{directed} if every finite subset of \(X\) has an upper bound in \(X\).} subset \(D \subseteq A\),
+ \(f(\sqcup D) = \sqcup f(D)\).
+\end{dfn}
+
+\begin{prp}
+  \textsc{CL} is a localized \(\mathbf{O}\)--category.
+\end{prp}
+\begin{proof}
+  Let \((D, \lhd)\) be a complete lattice.
+  Given a d--continuous and idempotent function \(f \colon D \to D\), let \(E := f(D)\) and \(<\) the restriction of \(\lhd\) to \(E\). %chktex 21 chktex 8
+  Then, \((E,<)\) is a poset. For any directed subset \(B \subseteq E\), thanks to \(D\) being a cl, we obtain that \(\sqcup B \in D\).
+  Noticing that \(f\) acts as the identity over \(E\) --- it is idempotent ---, by using Knaster--Tarski we deduce that \(\sqcup B \in E\) and \(\sqcup_D B = \sqcup_E B\). %chktex 8
+  Going on,
+  \begin{equation*}
+    \sqcup B = \sqcup f(B) = f(\sqcup B) \in E.
+  \end{equation*}
+
+  Defining \(g \colon D \to E\) as \(g(x) = f(x)\) and \(h \colon E \to D\) as the inclusion, we conclude that \(f\) is split, since \(h \circ g = f\) and \(g \circ h = 1_E\); then, \textsc{cl} is localized.
+\end{proof}
+
+\subsection{Examples of locally continuous functors}
+
+The functors which we are going to define are essential for the specification of recursive datatypes. While they will be considered over \(\mathcal{C} := \mathrm{\textsc{cpo}}\), everything that will be said can be generalized as well.
+
+\paragraph{The ``arrow'' functor.}
+Let \((\rightarrow) \colon \mathcal{C}^\textup{op} \times \mathcal{C} \to \mathcal{C}\) defined as follows:
+\begin{align*}
+    (\rightarrow)(X,Y) &:= \mathcal{C}(X,Y) \\
+    \intertext{Given two morphisms \(f \colon X' \to X\), \(g \colon Y \to Y'\),}
+    (\rightarrow)(f,g) &\colon
+      \mathcal{C}(X,Y) \to \mathcal{C}(X',Y'), \;
+      (\rightarrow)(f,g)(h) := g \circ h \circ f.
+\end{align*}
+Then, \((\rightarrow)\) is a functor; since \(\mathcal{C}^\textup{op} \times \mathcal{C}\) is a localized \(\mathbf{O}\)--category and \((\rightarrow)(f,g)\) is \(omega\)--continuous --- thanks to the \(\omega\)--continuity of composition in \(\mathbf{O}\)--categories ---, \((\rightarrow)\) is also a locally continuous functor. % chktex 21
+
+We can thus induce an \(\omega\)--cocontinuous functor \({(\rightarrow)}^\textup{E} \colon {(\mathcal{C}^\textup{op} \times \mathcal{C})}^\textup{E}\to \mathcal{C}^\textup{E}\). % chktex 21
+Thanks to the result reported in Propositions~\ref{iso:dual} and~\ref{iso:prod}, we can claim that \({(\mathcal{C}^\textup{op} \times \mathcal{C})}^\textup{E} \simeq \mathcal{C}^\textup{E} \times \mathcal{C}^\textup{E}\), with isomorphism
+\(f \mapsto ({\pi_1^\textup{E}(f)}^\star, \pi_2^\textup{E})\).
+
+Finally, we define the \emph{arrow} functor
+\begin{equation*}
+  \begin{split}
+    (\rightarrow) \colon \mathcal{C}^\textup{E} \times \mathcal{C}^\textup{E} &\to \mathcal{C}^\textup{E} \\
+    (X,Y) &\mapsto \mathcal{C}(X,Y) \\
+    (f,g) &\mapsto (h \mapsto g \circ h \circ f).
+  \end{split}
+\end{equation*}

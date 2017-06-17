@@ -1,0 +1,280 @@
+\section{\(\mathbf{O}\)--categories and projection pairs}
+
+In a general setting, verifying whether a given category is \(\omega\)--cocomplete --- and, in a similar fashion, checking if a functor is \(\omega\)--cocontinuous --- is not an easy task. %chktex 21
+Nevertheless, there is a class of categories, first introduced by Wand in~\cite{Wand1979}, which structure allows for easily verifiable criteria to arise.
+These so--called \(\mathbf{O}\)--categories include almost every category that occurs in semantics.%chktex 8
+%
+% This section goes along with the work presented in~\cite{Smyth1982}.
+
+\begin{dfn}
+  An \emph{\(\mathbf{O}\)--category} is a category which satisfies the following conditions:
+  \begin{enumerate}
+    \item every hom--set is a partial order~\footnote{The partial order on a hom--set in an \(\mathbf{O}\)--category will hereafter be denoted by \(\sqsubseteq{}\).} in which every ascending %chktex 8
+    \(\omega\)--chain has a least upper bound; %chktex 21
+    \item composition of morphisms is an \(\omega\)--continuous operation with respect to that partial order.%chktex 21
+  \end{enumerate}
+\end{dfn}
+
+In an \(\mathbf{O}\)--category, it is possible to consider \emph{projection pairs}. These turn out to have some useful applications, which we are going to show in later sections.
+
+\begin{dfn}
+  Let \(\mathcal{C}\) be an \(\mathbf{O}\)--category. Then, every tuple \((f,f^\star)\) satisfying
+  \begin{align}
+    f &\colon A \to B & f^\star \circ f = 1_A \quad  \\
+    f^\star &\colon B \to A & f \circ f^\star \sqsubseteq 1_B \quad
+  \end{align}
+  with \(A,B \in \obj{\mathcal{C}}\) is called a \emph{projection pair}, where \(f\) is an \emph{embedding} and \(f^\star\) a \emph{projection}.%chktex 21
+\end{dfn}
+
+An interesting feature of projection pairs is that they're uniquely determined by one of their components: given an embedding, we can thereby take \emph{the} associated projection.
+The following lemma justifies what has just been asserted.
+
+\begin{lem}
+  Let \((f,f^\star)\) and \((g,g^\star)\) be projection pairs from \(A\) to \(B\).
+  Then,
+  \begin{equation*}
+    f \sqsubseteq g \iff g^\star \sqsubseteq f^\star \qquad \text{and} \qquad
+    f = g \iff f^\star = g^\star.
+  \end{equation*}
+\end{lem}
+\begin{proof}
+  Assume that \(f \sqsubseteq h\). Since composition is \(\omega{}\)--continuous --- hence monotonic --- we find
+  \begin{equation*}
+    g^\star = 1_A \circ g^\star = (f^\star \circ f) \circ g^\star
+    \sqsubseteq (f^\star \circ g) \circ g^\star \sqsubseteq f^\star \circ 1_B = f^\star.
+  \end{equation*}
+  Similarly, we prove the opposite implication. Finally,
+  \begin{equation*}
+    f = g \iff f \sqsubseteq g \land g \sqsubseteq f
+    \iff g^\star \sqsubseteq f^\star \land f^\star \sqsubseteq g^\star \iff f^\star = g^\star.\qedhere
+  \end{equation*}
+\end{proof}
+
+For each embedding \(f\), we will denote by \(f^\star\) its associated projection. %chktex 21
+In addition, for an \(\mathbf{O}\)--category \(\mathcal{C}\), we denote by \(\mathcal{C}^\textup{E}\) its subcategory consisting of all its objects, but with as morphisms only the embeddings.
+In fact, the composition of embeddings is still an embedding: given embeddings \(f\), \(g\) the arrow \(g \circ f\) is an embedding with corresponding projection \({(g \circ f)}^\star = f^\star \circ g^\star\).%chktex 21
+In a similar fashion, it is possible to define \(\mathcal{C}^\textup{P}\), the subcategory of \(\mathcal{C}\) which morphisms are projections.
+
+\subsection{The initiality theorem}
+
+A first, important result, concerning colimits in \(\mathbf{O}\)--categories, is stated in the initiality theorem, that provides a simple way to check whether a cocone is a colimit in a subclass of \(\mathbf{O}\)--categories.
+
+\begin{lem}\label{lem:3-1}
+  Let \(\mathcal{C}\) be an \(\mathbf{O}\)--category, \(\Delta{}\) an \(\omega{}\)--chain in \(\mathcal{C}^\textup{E}\) and \((D,\alpha)\), \((E,\beta)\) two \(\Delta\)--cocones.%chktex 21
+  Then, the following facts hold:
+  \begin{enumerate}
+    \item \(\lbrace \alpha_i \circ \beta_i^\star \rbrace_{i \in \mathbb{N}}\) is an ascending \(\omega\)--chain in \(\mathcal{C}(E,D)\);%chktex 21
+    \item if \(f = \bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \beta_i^\star)\), then \(f\) is a morphisms of cocones:
+    \begin{equation*}
+      \forall n \in \mathbb{N}.\: f \circ \beta_n = \alpha_n.
+    \end{equation*}
+  \end{enumerate}
+\end{lem}
+\begin{proof}
+  Let \(n \in \mathbb{N}\) such that \(n \ge 0\). Then,
+  \begin{equation*}
+    \begin{split}
+      \alpha_n \circ \beta_n^\star &=
+      (\alpha_{n+1} \circ f_n) \circ {(\beta_{n+1} \circ f_n)}^\star \\
+      &= \alpha_{n+1} \circ (f_n \circ f_n^\star) \circ \beta_{n+1}^\star
+      \sqsubseteq \alpha_{n+1} \circ \beta_{n+1}.
+    \end{split}
+  \end{equation*}
+
+  Passing on to the second fact, we should first note that \(f\) is well--defined, since \(\mathcal{C}\) is an \(\mathbf{O}\)--category. %chktex 8
+  Furthermore, the deletion of an initial segment of an \(\omega\)--chain leaves its least upper bound unaffected. %chktex 21
+  So,
+  \begin{equation*}
+    \begin{split}
+      f \circ \beta_n &=
+      \bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \beta_i^\star) \circ \beta_n
+      = \bigsqcup_{i \ge n}(\alpha_i \circ \beta_i^\star) \circ \beta_n \\
+      &= \bigsqcup_{i \ge n}(\alpha_i \circ \beta_i^\star \circ \beta_n)
+      = \bigsqcup_{i \ge n}(\alpha_i \circ \beta_i^\star \circ \beta_i \circ f_i \circ f_{i+1} \circ \dotsc \circ f_n) \\
+      &= \bigsqcup_{i \ge n}(\alpha_i \circ f_i \circ f_{i+1} \circ \dotsc \circ f_n)
+      = \bigsqcup_{i \ge n}(\alpha_n) = \alpha_n.
+    \end{split}
+  \end{equation*}\qedhere
+\end{proof}
+
+A corner--case of the Lemma~\ref{lem:3-1} occurs when the two cocones coincide, i.e. \((E,\beta) = (D,\alpha)\). %chktex 8
+Of course, \(f = \bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star) \sqsubseteq 1_D\).
+Is it possible to make additional claims, if equality is reached?
+
+\begin{thm}\label{thm:3-1}
+  Let \(\mathcal{C}\) be an \(\mathbf{O}\)--category, \(\Delta = \lbrace (D_i,f_i) \rbrace_{i \in \mathbb{N}}\) an \(\omega{}\)--chain in \(\mathcal{C}^\textup{E}\) and \((D,\alpha)\) a cocone for \(\Delta{}\).
+  Suppose that \(\bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star) = 1_D\).
+  Then, \((D,\alpha)\) is a colimit for \(\Delta{}\).
+  Moreover, if \((E,\beta)\) is a cocone for \(\Delta{}\), then
+  \begin{equation*}
+    f = \bigsqcup_{i \in \mathbb{N}}(\beta_i \circ \alpha_i^\star)
+  \end{equation*}
+  is the mediating morphism from \(D\) to \(E\) --- and its associated projection is \(f^\star = \bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \beta_i^\star)\).
+\end{thm}
+\begin{proof}
+  First, we are going to show that \(f\) is an embedding from \(D\) to \(E\).
+  \begin{align*}
+    f^\star \circ f &\overset{\bullet}{=}
+    \bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \beta_i^\star \circ \beta_i \circ \alpha_i^\star) =
+    \bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star) \overset{\dagger}{=} 1_D; \\
+    f \circ f^\star &\overset{\bullet}{=}
+    \bigsqcup_{i \in \mathbb{N}}(\beta_i \circ \alpha_i^\star \circ \alpha_i \circ \beta_i^\star) =
+    \bigsqcup_{i \in \mathbb{N}}(\beta_i \circ \beta_i^\star)
+    \sqsubseteq 1_E.
+  \end{align*}
+  The equalities marked with \(\bullet\) are justified from the \(\omega\)--continuity of the composition, while \(\dagger\) follows from the hypothesis. %chktex 21
+
+  As already seen in Lemma~\ref{lem:3-1}, \(f\) is a morphism of cocones.
+  Now, what is left is proving that \(f\) is the unique morphism from \((D,\alpha)\) to \((E,\beta)\) such that, for all \(n \in \mathbb{N}\), \(f \circ \alpha_n = \beta_n\).
+  Let \(\eta\) be another such morphism. Then, %chktex 21
+  \begin{equation*}
+    \begin{split}
+      \eta &= \eta \circ 1_D
+      = \eta \circ \bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star) = \bigsqcup_{i \in \mathbb{N}}(\eta \circ \alpha_i \circ \alpha_i^\star) \\
+      &= \bigsqcup_{i \in \mathbb{N}}(\beta_i \circ \alpha_i^\star)
+      = f.
+    \end{split}
+  \end{equation*}
+\end{proof}
+
+It would be desirable to have a converse result, with respect to Theorem~\ref{thm:3-1}, namely, showing that \((D,\alpha)\) is a colimit if and only if the identity morphism \(1_D\) equals \(\bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star)\).
+
+\begin{dfn}\label{dfn:localized}
+  An \(\mathbf{O}\)--category \(\mathcal{C}\) is called \emph{localized} if and only if for any \(\omega{}\)--chain \(\Delta{}\) in \(\mathcal{C}^\textup{E}\) and any \(\Delta{}\)--colimit \((D,\alpha)\) there exist an object \(E \in \obj{\mathcal{C}}\) and a projection pair \((i,g) \colon E \to D\) such that
+  \begin{equation*}
+    \bigsqcup_{n \in \mathbb{N}}(\alpha_n \circ \alpha_n^\star) = i \circ g.
+  \end{equation*}
+\end{dfn}
+
+Being \((i,g)\) a projection pair, \(i \circ g \sqsubseteq 1_D\) vacuously holds. If the limit--case \(i \circ g = 1_D\) is reached, then \(E\) and \(D\) are isomorphic and \(g = i^{-1}\). %chktex 8
+Conversely, if \((i,g)\) has an inverse \(\eta{}\), i.e. \((i,g) \circ \eta = (1_D,1_D)\), then
+\begin{equation*}
+    1_D = 1_D \circ 1_D = i \circ \eta^\textup{L} \circ \eta^\star \circ g
+    \sqsubseteq i \circ g;
+\end{equation*}
+this, jointly with \(i \circ g \sqsubseteq 1_D\), leads to \(i \circ g = 1_D\).
+
+\begin{thm}[Initiality theorem]\label{thm:3-2}
+  Let \(\mathcal{C}\) be a localized \(\mathbf{O}\)--category, \(\Delta{}\) an \(\omega{}\)--chain in \(\mathcal{C}^\textup{E}\) and \((D,\alpha)\) a cocone for \(\Delta{}\). The following are equivalent:
+  \begin{enumerate}
+    \item \((D,\alpha)\) is a \(\Delta{}\)--colimit;
+    \item \(\bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star) = 1_D\).
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  Again, to be seen later.
+\end{proof}
+
+To test whether an \(\mathbf{O}\)--category is localized, it would be desirable to have a simpler criterion. This can be obtained, thanks to idempotents and splits. Let \(\mathcal{C}\) be a category and \(f \colon D \to D\) an arrow, with \(D \in \obj{\mathcal{C}}\). Then, \(f\) is called an \emph{idempotent} when \(f \circ f = f\); it is called \emph{split} when there exists another object \(E\) and morphisms \(g \colon D \to E\), \(h \colon E \to D\) such that \(f = h \circ g\) and \(g \circ h = 1_E\).
+\begin{center}
+  \begin{tikzcd}
+    & E \arrow[r, "1_E"] \arrow[d, "h"] & E \\
+    D \arrow[r, "f"] \arrow[ur, "g"] & D \arrow[ur, "g"] &
+  \end{tikzcd}
+\end{center}
+
+Note that any split is idempotent.\footnote{Indeed, \(f \circ f = h \circ g \circ h \circ g = h \circ 1_E \circ g = f\).}
+
+\begin{prp}
+  If every idempotent in an \(\mathbf{O}\)--category \(\mathcal{C}\) is split, then \(\mathcal{C}\) is localized.
+\end{prp}
+\begin{proof}
+  Let \((D,\alpha)\) be a cocone for an \(\omega{}\)--chain \(\Delta{}\) in \(\mathcal{C}^\textup{E}\).
+  Then, the morphism \(f := \bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star)\) is idempotent:
+  \begin{equation*}
+    \begin{split}
+      f \circ f &= (\bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star)) \circ (\bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star)) \\
+      &= \bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star \circ \alpha_i \circ \alpha_i^\star)
+      = \bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \alpha_i^\star) = f.
+    \end{split}
+  \end{equation*}
+  Thanks to the assumption that every idempotent is split in \(\mathcal{C}\), there exist an object \(E\) and two morphisms \(g \colon D \to E\), \(h \colon E \to D\) such that \(g \circ h = 1_E\) and \(h \circ g = f \sqsubseteq 1_D\).
+  Thus, \((g,h)\) is a projection pair from \(E\) to \(D\) with \(f = h \circ g\).
+  This makes us conclude that \(\mathcal{C}\) is localized.
+\end{proof}
+
+\subsection{The continuity theorem}
+
+Let \(\mathcal{C}\) and \(\mathcal{L}\) be \(\mathbf{O}\)--categories. Suppose that \(F \colon \mathcal{C} \to \mathcal{L}\) is a functor.
+Which conditions should we impose, to ensure that a functor \(F^\textup{E} \colon \mathcal{C}^\textup{E} \to \mathcal{L}^\textup{E}\) can be induced?
+
+One would start by define \(F^\textup{E}\) as follows:
+\begin{align*}
+  F^\textup{E}(A) &= FA, A \in \obj{\mathcal{C}^\textup{E}} \\
+  F^\textup{E}(f) &= Ff, f\:\text{a morphism of}\:\mathcal{C}^\textup{E}.
+\end{align*}
+Is \(F(f)\) a morphism in \(\mathcal{L}^\textup{E}\)?
+That is, assuming \((f,g) \colon D \to E\) is a projection pair in \(\mathcal{C}\), is \((Ff,Fg) \colon FD \to FE\) a projection pair in \(\mathcal{L}\)?
+From \(g \circ f = 1_D\) we derive that \(Fg \circ Ff = F(g \circ f) = F1_D = 1_{FD}\).
+However, from \(f \circ g \sqsubseteq 1_E\) it cannot be deduced that \(Ff \circ Fg \sqsubseteq 1_{FE}\), unless \(F\) is monotonic, when seen as a map between hom--sets. This leads to the following definition.
+
+\begin{dfn}
+  A functor \(F \colon \mathcal{C} \to \mathcal{L}\) between \(\mathbf{O}\)--categories is \emph{locally monotonic} iff, for all \(A, B \in \obj{\mathcal{C}}\), the map \(\mathcal{C}(A,B) \overset{F}{\to}\mathcal{L}(FA,FB)\) is monotonic.
+\end{dfn}
+
+Actually, local monotonicity ensures that, given a functor between \(\mathbf{O}\)--categories, even its restriction to the subcategories with embeddings as morphisms is a functor.
+
+\paragraph{Continuity of \(F^\textup{E}\)}
+The initiality theorem may help us in establishing an easy criterion to determine the \(\omega{}\)--continuity of \(F^\textup{E}\).
+Assume that all the conditions of Theorem~\ref{thm:3-2} are satisfied, and that \(F \colon \mathcal{C} \to \mathcal{L}\) is a locally monotonic function.
+Then, \(F^\textup{E} \colon \mathcal{C}^\textup{E} \to \mathcal{L}^\textup{E}\) is also a functor and \((F^\textup{E}D, \lbrace F^\textup{E}\alpha_i\rbrace_{i \in \mathbb{N}})\) is a cocone for the \(\omega{}\)--chain \(\Delta^\prime = \lbrace F^\textup{E} D_i, F^\textup{E}f_i \rbrace_{i \in \mathbb{N}}\) in \(\mathcal{L}^\textup{E}\).
+Since \((D,\alpha)\) is a \(\Delta{}\)--colimit, the initiality theorem states that \(\bigsqcup_{n \in \mathbb{N}}(\alpha_n \circ \alpha_n^\star) = 1_D\).
+Thus,
+\begin{equation*}
+  \begin{split}
+    1_FD &= F1_D = F\left(\bigsqcup_{n \in \mathbb{N}}(\alpha_n \circ \alpha_n^\star)\right) \overset{\dagger}{=} \bigsqcup_{n \in \mathbb{N}}\left(F(\alpha_n \circ \alpha_n^\star)\right) = \bigsqcup_{n \in \mathbb{N}}(F\alpha_n \circ F\alpha_n^\star) \\
+    &= \bigsqcup_{n \in \mathbb{N}}(F^\textup{E}\alpha_n \circ F^\textup{E}\alpha_n^\star)
+  \end{split}
+\end{equation*}
+shows that \((F^\textup{E}D, \lbrace F^\textup{E}\alpha_i\rbrace_{i \in \mathbb{N}})\) is a \(\Delta^\prime{}\)--colimit; it is important to observe that the equality (\(\dagger{}\)) holds only when \(F\) is \(\omega{}\)--continuous, when viewed as a morphism map.
+
+\begin{dfn}
+  A functor \(F \colon \mathcal{C} \to \mathcal{L}\) between \(\mathbf{O}\)--categories is \emph{locally continuous} iff, for all \(A, B \in \obj{\mathcal{C}}\), the map \(\mathcal{C}(A,B) \overset{F}{\to}\mathcal{L}(FA,FB)\) is \(\omega{}\)--continuous.
+\end{dfn}
+
+Examples of locally continuous functors are the identity and the projection functors.
+
+An immediate and importance consequence of this reasoning is contained in the following result.
+
+\begin{thm}[Continuity theorem]
+  Let \(\mathcal{C}\), \(\mathcal{L}\) be \(\mathbf{O}\)--categories and \(F \colon \mathcal{C} \to \mathcal{L}\) a locally continuous functor.
+  Suppose that \(\mathcal{C}\) is localized.
+  Then, \(F^\textup{E} \colon \mathcal{C}^\textup{E} \to \mathcal{L}^\textup{E}\) is \(\omega{}\)--cocontinuous.
+\end{thm}
+
+\subsection{Solution of a fixed point equation}
+
+Let \(F\) be a locally continuous endofunctor over a localized \(\mathbf{O}\)--category \(\mathcal{C}\).
+In addition, suppose that \(\mathcal{C}^\textup{E}\) is an \(\omega{}\)--category, with initial object \(\bot{}\).
+Then, the following hold:
+\begin{enumerate}
+  \item \(F^\textup{E}\) is an \(\omega{}\)--cocontinuous endofunctor over \(\mathcal{C}^\textup{E}\);
+  \item \(F^\textup{E}\) has an initial fixed point \((A,\alpha)\), where \(\alpha \colon FA \to A\) is iso in \(\mathcal{C}^\textup{E}\);
+  \item \((A, \lbrace \mu_n \colon F^n\bot \to A \rbrace_{n \in \mathbb{N}^\star})\) is a colimit for a certain \(\omega{}\)--chain \(\Delta{}\) in \(\mathcal{C}^\textup{E}\);\footnote{Remember that \(F^\textup{E}\bot = F\bot{}\).}
+  \item By functoriality of \(F^\textup{E}\), also \((FA, \lbrace F^\textup{E}\mu_{n-1} \colon F^n\bot \to A \rbrace_{n \in \mathbb{N}^\star})\) is a \(\Delta{}\)--colimit.
+\end{enumerate}
+Since \((A,\mu)\) is a \(\Delta{}\)--colimit, the initiality theorem implies
+\begin{equation*}
+  \bigsqcup_{n \in \mathbb{N}^\star}(\mu_n \circ \mu_n^\star) = 1_A.
+\end{equation*}
+Moreover, the mediating morphism from \(A\) to \(FA\) is given by
+\begin{equation*}
+  f := \bigsqcup_{n \in \mathbb{N}^\star}(F^\textup{E}\mu_{n-1} \circ \mu_n^\star).
+  % \left(\bigsqcup_{n \in \mathbb{N}^\star}(F^\textup{E}\mu_{n-1} \circ \mu_n^\star),\bigsqcup_{n \in \mathbb{N}^\star}(\mu_n \circ F(\mu_{n-1}^\star))\right).% = \left(\bigsqcup_{n \in \mathbb{N}^\star}(F^\textup{E}\mu_{n-1} \circ \mu_n^\star), \bigsqcup_{n \in \mathbb{N}^\star}(\mu_n \circ F(\mu_{n-1}^\star))\right)
+\end{equation*}
+
+\begin{center}
+  \begin{tikzcd}
+    \bot \arrow[r, "!"] &%chktex 18
+    F\bot \arrow[r, "F!"] &%chktex 18
+    \dots \arrow[r] &
+    F^n\bot \arrow[rr, "F^n!"]%chktex 18
+        \arrow[dr, "\mu_n" description]%chktex 18
+        \arrow[ddr, "F^\textup{E}\mu_n" description] & &%chktex 18
+    F^{n+1} \arrow[r]%
+            \arrow[dl, "\mu_{n+1}" description]%chktex 18
+            \arrow[ddl, "F^\textup{E}\mu_{n+1}" description] & \dots{}\\%chktex 18
+    & & & & A \arrow[d, "{f}" description]& \\%chktex 18
+    & & & & FA &
+  \end{tikzcd}
+\end{center}

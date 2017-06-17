@@ -1,0 +1,21 @@
+\section{Introduction}
+\nocite{winskel1993formal}
+\nocite{bos-hemerik}
+
+Recursive domain equations arise in many areas of denotational semantics and type theory, two of the mathematical fields that lay down the theoretical foundations of programming languages.
+
+A common situation we may be confronted with is that of a typed programming language which features some basic types, for example, the set of natural numbers \(\mathbb{N}\) or the set of truth values \(\mathbb{B} = \lbrace \mathbb{F}, \mathbb{T} \rbrace\), and some compound ones, like the product type \(A \times B\), with \(A\) and \(B\) simple types. %chktex 21
+There exist suitable mathematical structures, which allow us to effectively describe recursively--defined programs in terms of fixed points of a function \(f\) ranging over a meaning domain \(D\); \(\omega\)--cpos have been the prevalent choice for some time, when dealing with recursion over \emph{values}.
+
+However, there are also programming languages that permit a recursive specification of data types, through fixed--point equations, thus introducing recursion over \emph{domains}
+A meaningful example is provided by the equation
+\begin{equation*}
+  X_A = X_A \to A
+\end{equation*}
+which describes auto--applying functions over a domain \(A\).
+If \(\lvert A \rvert \ge 2\), then \(X_A\) cannot be a set, due to Cantor's theorem --- indeed, \(\lvert X_A \rvert \ge 2^{\lvert X_A \rvert}\) is false whenever \(X_A\) is a set.
+
+A viable and powerful way to solve recursive domain equations is provided by category theory, which builds upon least fixed point theory over \(\omega\)--cpos to provide a canonical construction for the solution of those equations.
+
+In the next chapters, we are going to review the main results of fixed point theory for \(\omega\)--cpos and categories; then, we will introduce \(\mathbf{O}\)--categories and embedding--projection pairs and we will show how a least fixed point can be taken in this framework.
+Finally, we will discuss some isomorphic relations arising in some \(\mathbf{O}\)--categories and show how desirable features of programming languages find a natural place in the theory we presented.

@@ -1,0 +1,257 @@
+\section{Fixed point theory for categories}\label{sec-2}
+
+Category theory provides an appropriate and very general framework for studying recursive equations of the form
+
+\begin{equation*}
+  D \simeq F(D),
+\end{equation*}
+
+where \(D\) ought to be an \(\omega{}\)--cpo or a similar structure and \(F\) prescribes a way of combining objects of these kinds.
+In this section, some notions of category theory are introduced. Then, a solution method for recursive domain equations is presented, as a systematic generalisation of the theory outlined in Section~\ref{sec-1}.
+
+\subsection{From \(\omega\)--cpos to \(\omega\)--cocomplete categories}%chktex 21
+
+\begin{dfn}
+  A \emph{category} \(\mathcal{C}\) consists of:
+  \begin{enumerate}
+    \item a class \(\obj{\mathcal{C}}\), containing its \emph{objects};
+    \item for each \(A, B \in \obj{\mathcal{C}}\), a set \(\mathcal{C}(A,B)\) of the \emph{morphisms} from \(A\) to \(B\);
+    \item for each \(A,B,C \in \obj{\mathcal{C}}\), an associative map
+    \(
+      \circ \colon \mathcal{C}(B,C) \times \mathcal{C}(A,B) \to \mathcal{C}(A,C)
+    \)
+    called the \emph{composition};
+    \item for each object \(A\), the \emph{identity} morphism \(1_A \colon A \to A\) satisfying \(f \circ 1_A = f\) and \(1_A \circ g = g\) for \(f \colon A \to B\) and \(g \colon B \to A\).
+  \end{enumerate}
+  \begin{center}
+    \begin{tikzcd}
+      A \arrow[loop left]{l}{\mathrm{id}_A}
+        \arrow[r, yshift=2pt, "f"] & B \arrow[l, yshift=-2pt, "g"]% chktex 18
+    \end{tikzcd}
+  \end{center}
+\end{dfn}
+
+Given a category \(\mathcal{C}\), its \emph{dual} \(\mathcal{C}^\textup{op}\) is made by reverting the arrows, i.e. \(\obj{\mathcal{C}} = \obj{\mathcal{C}^\textup{op}}\) and \(f \in \mathcal{C}(A,B)\) implies \(f \in \mathcal{C}^\textup{op}(B,A)\), for all \(A,B \in \obj{\mathcal{C}}\);
+if \(\circ{}\) is the composition map over \(\mathcal{C}\), then \(\mathcal{C}^\textup{op}\) is provided with a composition map \(\bullet\) defined as \(f \bullet g := g \circ f\), for all morphism \(f\), \(g\) in \(\mathcal{C}\) which can be composed.%chktex 21
+A \emph{subcategory} \(\mathcal{L}\) of \(\mathcal{C}\) is a category formed by taking a subclass of \(\obj{\mathcal{C}}\) and a subset for each morphism set of \(\mathcal{C}\). % chktex 8
+A subcategory is \emph{full} iff the morphisms sets are preserved, i.e. \(\mathcal{L}(A,B) = \mathcal{C}(A,B)\), \(A,B \in \obj{\mathcal{L}}\).
+
+\paragraph{From posets to categories} Let \((C,\sqsubseteq)\) be a poset. Is it possible to think of a partial order in terms of categorical entities?
+Clearly, each element of \(C\) can be seen as an object of a certain category \(\mathcal{C}\). Moving on, the order relation may be recast using morphisms: given \(x, y \in C\),
+\begin{equation*}
+  \mathcal{C}(x,y) =
+  \begin{cases}
+    \lbrace x \to y \rbrace & x \sqsubseteq y \\ \emptyset & \text{otherwise}
+  \end{cases}
+\end{equation*}
+guarantees the existence of the identity morphism, thanks to reflexivity, and the compositionality of arrows, since the order relation is transitive.
+However, there isn't a categorical counterpart of antisimmetry.
+In fact, if two objects can be related each other by means of morphisms, that doesn't imply they are the same object.
+
+Thus, the concept of \emph{isomorphism} is introduced: two object \(A\), \(B\) are isomorphic whenever there exist two morphisms \(f \colon A \to B\), \(g \colon B \to A\) such that \(f \circ g = 1_B\) and \(g \circ f = 1_A\). Diagrammatically, it corresponds to the commutation of
+\begin{center}
+  \begin{tikzcd}
+    A \arrow[loop left]{l}{1_A}
+      \arrow[r, yshift=2pt, "f"]% chktex 18
+    & B \arrow[l, yshift=-2pt, "g"] \arrow[loop right]{r}{1_B}% chktex 18
+  \end{tikzcd}
+\end{center}
+The morphism \(f\) is called and \emph{isomorphism}, while \(g\) is its \emph{inverse}, denoted with \(f^{-1}\).
+
+The categorical analogue of the least element of a poset is an \emph{initial object}, that is, an object \(\bot \in \obj{\mathcal{C}}\) such that each morphism set from \(\bot\) to each object of \(\mathcal{C}\) contains exactly one arrow.%chktex 21
+Note that the initial object of a category is unique up to isomorphism: given \(A\), \(B\) both initial objects in \(\mathcal{C}\), the diagram
+\begin{center}
+  \begin{tikzcd}
+    A \arrow[loop left]{l}{1_A}
+      \arrow[r, yshift=2pt, "f"]% chktex 18
+      & B\arrow[l, yshift=-2pt, "g"]% chktex 18
+      \arrow[loop right]{r}{1_B}
+  \end{tikzcd}
+\end{center}
+commutes, because \(\mathcal{C}(A,A) = \lbrace 1_A \rbrace\), \(\mathcal{C}(B,B) = \lbrace 1_B \rbrace\), \(\mathcal{C}(A,B) = \lbrace f \rbrace\) and \(\mathcal{C}(B,A) = \lbrace g \rbrace\) are the unique morphisms involved here.%chktex 21
+
+
+Moving on to ascending \(\omega\)--chains, one has to deal with the fact that there might be more than a morphism going from an object to another. %chktex 21
+Therefore, an \emph{\(\omega\)--chain} in a category \(\mathcal{C}\) is defined as a sequence \(\lbrace (D_i,f_i) \rbrace_{i \in \mathbb{N}}\), where each \(D_i\) is an object of \(\mathcal{C}\) and \(f_i \in \mathcal{C}(D_i, D_{i+1})\), with \(i \in \mathbb{N}\), is the specified morphism.%chktex 21
+
+Diagrammatically, an \(\omega{}\)--chain is represented as
+\begin{center}
+  \begin{tikzcd}
+    D_0 \arrow[r, "f_0"] &%chktex 18
+    D_1 \arrow[r, "f_1"] &%chktex 18
+    \dotsc{} \arrow[r, "f_{n-1}"] &%chktex 18
+    D_n \arrow[r, "f_n"] &%chktex 18
+    D_{n+1} \arrow[r, "f_{n+1}"] &%chktex 18
+    \dotsc{}
+  \end{tikzcd}
+\end{center}
+
+As an upper bound ``dominates'' each element of an ascending \(\omega\)--chain, so the categorical counterpart should be addressed by at least one morphism for each object of the \(\omega\)--chain.%chktex 21
+Additionally, commutativity of the generated diagram is required, because of the possible existence of more than one morphism from a chain object to the ``upper bound'' object.
+A \emph{cocone} for an \(\omega\)--chain \(\Delta\) in \(\mathcal{C}\) is then defined as a pair \((D, \delta)\), with \(D\) an object of \(\mathcal{C}\) and \(\delta = \lbrace\delta_i\rbrace_{i \in \mathbb{N}}\) a sequence of morphisms satisfying the condition \(\delta_i = \delta_{i+1} \circ f_i\) for each \(i \in \mathbb{N}\). Diagrammatically, this amounts to the commutativity of the diagram
+  \begin{center}
+    \begin{tikzcd}%[row sep=large, column sep=small, cramped]
+      D_0 \arrow[r, "f_0"] \arrow[drr, "\delta_0" description]%chktex 18
+      & D_1 \arrow[r, "f_1"] \arrow[dr, "\delta_1" description]%chktex 18
+      & \dotsc{} \arrow[r]
+      & D_n \arrow[r, "f_n"] \arrow[dl, "\delta_i" description]%chktex 18
+      & D_{n+1}\arrow[dll,"\delta_{n+1}" description]\arrow[r,"f_{n+1}"]%chktex 18
+       & \dotsc{} \\
+      & & D & & &
+    \end{tikzcd}
+  \end{center}
+
+Thanks to the notions introduced so far, it is now possible to define an equivalent concept of a least upper bound, in category theory.
+This can be achieved by considering the category \(\mathcal{U}_\Delta\), which objects are the cocones of the \(\omega\)-chain \(\Delta\) and which morphisms sets are specified as
+\begin{equation*}
+  \mathcal{U}_\Delta((A,\alpha),(B,\beta)) := \lbrace f \colon A \to B \mid
+  \forall n \in \mathbb{N}.\,\beta_n = \alpha_n \circ f \rbrace;
+\end{equation*}
+the initial object \((A, \alpha)\) of this category is called a \emph{colimit} of \(\Delta\), while the unique morphism from \((D,\delta)\) to each \(\Delta\)--cocone \((B, \beta)\) is said \emph{mediating}.%chktex 21
+A diagrammatical representation of a colimit is the following:
+\begin{center}
+  \begin{tikzcd}
+    D_0 \arrow[r, "f_0"] &%chktex 18
+    D_1 \arrow[r, "f_1"] &%chktex 18
+    \dots \arrow[r] &
+    D_i \arrow[rr, "f_i"]%chktex 18
+        \arrow[dr, "\alpha_i" description]%chktex 18
+        \arrow[ddr, "\beta_i" description] & &%chktex 18
+    D_{i+1} \arrow[r]%
+            \arrow[dl, "\alpha_{i+1}" description]%%chktex 18
+            \arrow[ddl, "\beta_{i+1}" description] & \dots{}\\%chktex 18
+    & & & & A \arrow[d, "{\exists! f}" description]& \\%chktex 18
+    & & & & B &
+  \end{tikzcd}
+\end{center}
+Similarly to initial objects, colimits are unique up to isomorphism.
+Now, all the elements are given, in order to introduce the categorical structure replacing the \(\omega\)--cpos.
+
+\begin{dfn}
+  An \emph{\(\omega\)--cocomplete} category is a category which has initial objects and in which each \(\omega\)--chain has a colimit. %chktex 21
+\end{dfn}
+
+\subsection{Functors and fixed points}
+
+We can reasonably argue that a monotonic function over a \(\omega\)--cpo may be thought as a ``structure--preserving'' map: the order is preserved and \(\omega\)--chains are mapped into \(\omega\)--chain. %chktex 21 chktex 8
+Moving to category theory, one may consider transformations that preserve some structural features, like commutativity of diagrams or identities.
+
+\begin{dfn}
+  A \emph{functor} from the category \(\mathcal{C}\) to the category \(\mathcal{L}\) consists of
+  \begin{enumerate}
+    \item a map \(\obj{\mathcal{C}} \to \obj{\mathcal{L}}\),
+    \item for all \(A, B \in \obj{\mathcal{C}}\), a map \(\mathcal{C}(A,B) \to \mathcal{L}(F(A),F(B))\) that preserves identity and composition, i.e.
+      if \(g \circ f\) is defined in \(\mathcal{C}\), then
+            \(F(g \circ f) = F(g) \circ F(f)\), and
+            \(F(1_A) = 1_{F(A)}\).
+  \end{enumerate}
+\end{dfn}
+
+\begin{rem}
+  Let \textsc{cat} be the category which objects are categories and morphisms are functors. This enables us to affirm that two categories are \emph{isomorphic} whenever they are related by a iso functor in \textsc{cat}.
+\end{rem}
+
+Then, as continuous function over \(\omega\)--cpos map least upper bounds to least upper bounds, so it should be required for a functor to map colimits to colimits. This justifies the following definition. %chktex 21
+
+\begin{dfn}
+  A functor \(F \colon \mathcal{C} \to \mathcal{L}\) is \emph{\(\omega\)--cocontinuous} iff it preserves colimits: that is, given an \(\omega\)--chain \({\langle (D_n,f_n) \rangle}_{n \in \mathbb{N}}\) in \(\mathcal{C}\) with colimit \((D,\delta)\), the tuple \((F(D),F(\delta))\) is a colimit for the \(\omega\)--chain \({\langle (F(D_n),F(f_n)) \rangle}_{n \in \mathbb{N}}\) in \(\mathcal{L}\). %chktex 21
+\end{dfn}
+
+Examples of \(\omega\)--cocontinuous functors are the projection functors \(\pi_1 \colon \mathcal{C} \times \mathcal{L} \to \mathcal{C}\), \(\pi_2 \colon \mathcal{C} \times \mathcal{L} \to \mathcal{L}\) and the diagonal functor \(\Delta \colon \mathcal{C} \to \mathcal{C} \times \mathcal{C}\). %chktex 21
+Also, each iso functor is \(\omega\)--cocontinuous. %chktex 21
+
+To conclude the transfer from order theory to category theory, we provide the counterpart of prefixed and fixed points.
+
+\begin{dfn}
+  Let \(\mathcal{C}\) be a category and \(F\) be an endofunctor\footnote{An \emph{endofunctor} over a category is a functor from that category to itself.} on \(\mathcal{C}\).
+  Then, an \emph{\(F\)--algebra} is a pair \((A,\alpha)\) where \(A \in \obj{\mathcal{C}}\) and \(\alpha \in \mathcal{C}(FA,A)\).
+  A \emph{fixed point} of \(F\) is an \(F\)--algebra with \(\alpha\) an isomorphism.%chktex 21
+\end{dfn}
+
+\subsection{The initial fixed point theorem}
+
+\(F\)--algebras, as should be expected from most of the mathematical objects introduced so far, can be thought of as objects of a category, which morphisms are constructed in the following way: given two \(F\)--algebras \((A,\alpha)\) and \((B,\beta)\), a \emph{\(F\)--homomorphism} from \((A,\alpha)\) to \((B,\beta)\) is an arrow \(f\) such that
+\begin{center}
+  \begin{tikzcd}
+    F(A) \arrow[r, "\alpha"] \arrow[d, "F(f)"]%chktex 18
+    & A \arrow[d, "f"]\\%chktex 18
+    F(B) \arrow[r, "\beta"] & B %chktex 18
+  \end{tikzcd}
+\end{center}
+commutes.
+
+Now, a generalisation of Lemma~\ref{lem:cpo-prefixed} is asserted and proved.
+\begin{lem}
+  Let \(F\) be an endofunctor on a category \(\mathcal{C}\).
+  If \((A,\alpha)\) is the initial \(F\)--algebra, then \(\alpha{}\) is an isomorphism.
+\end{lem}
+\begin{proof}
+  By applying \(F\) to \((A,\alpha)\), we first get another \(F\)--algebra \((F(A),F(\alpha))\), where \(F(\alpha) \colon F(F(A)) \to F(A)\); this implies, thanks to the initiality of \((A,\alpha)\), that there exists the unique \(F\)--homomorphism \(! \colon (A,\alpha) \to (F(A),F(\alpha))\).
+  Then, we observe that the diagram
+    \begin{center}
+      \begin{tikzcd}
+        F(A) \arrow[r, "F(!)"] \arrow[d, "\alpha"]%chktex 18
+        & F(F(A)) \arrow[r, "F(\alpha)"] \arrow[d, "F(\alpha)"]%chktex 18
+        & F(A) \arrow[d, "\alpha"]\\%chktex 18
+        A \arrow[r, "!"] & F(A) \arrow[r, "\alpha"]& A%chktex 18
+      \end{tikzcd}
+    \end{center}
+ commutes, because:
+  \begin{description}
+    \item[left cell] the arrow \(!{}\) is an \(F\)--homomorphism;
+    \item[right cell] we can interpret \(\alpha{}\) as an \(F\)--homomorphism from \((F(A),F(\alpha))\) to \((A,\alpha)\).
+  \end{description}
+  Next, we claim that \(!{}\) is the two--sided inverse of \(\alpha{}\), since
+  \begin{align*}
+    \alpha \circ ! &= 1_A \\
+    ! \circ \alpha &= F(\alpha) \circ F(!) = F (\alpha \circ !) = F(1_A) = 1_{F(A)}.
+  \end{align*}
+  Lastly, we can say that \(\alpha{}\) is an isomorphism.
+\end{proof}
+
+The main result of this section is the ``initial fixed point'' theorem, which generalizes what was stated in Theorem~\ref{thm:cpo-fixed}.
+
+\begin{thm}[initial fixed point theorem]
+  Let \(\mathcal{C}\) be a complete category, \(F\) an \(\omega{}\)--cocontinuous endofunctor over \(\mathcal{C}\) and \(\bot{}\) an initial object of \(\mathcal{C}\). If \(!{}\) is the unique morphism from \(\bot{}\) to \(F(\bot{})\), then
+  \begin{equation}
+    \Delta := {\langle(F^n(\bot),F^n(!))\rangle}_{n \in \mathbb{N}}
+  \end{equation}
+  is an \(\omega{}\)-chain, and for each \(\Delta\)--colimit \((A,\mu)\) there exists a morphism \(\alpha \colon F(A) \to A\) such that \(\fix := (A,\alpha)\) is an initial fixed point of \(F\).
+\end{thm}
+\begin{proof}[Proof Outline]
+  Here, a brief idea of the proof is given. For details, see~\cite{Hemerik1988}.
+  To prove that \(\Delta{}\) is an \(\omega{}\)--chain, one should proceed by induction on \(n \in \mathbb{N}\), showing that \(F^n(!) \in \mathcal{C}(F^n(\bot),F^{n+1}(\bot))\).
+
+  Next, to see that with each \(\Delta\)--colimit \((A,{\langle\mu_n \rangle}_{n\in\mathbb{N}})\) comes an isomorphism \(\alpha \colon F(A) \to A\) such that \((A,\alpha)\) is an \(F\)--algebra, it is needed to observe that both \((A,{\langle \mu_{n+1} \rangle}_{n\in\mathbb{N}})\) and \((F(A),{\langle\mu_n \rangle}_{n\in\mathbb{N}})\) are colimits of \(\Delta \setminus (\bot,!)\).
+  Thanks to this, the mediating morphism \(\alpha{}\) between the two colimits is the desired isomorphism.
+
+  Let \((B,\beta)\) be another fixed point of \(F\). The proof of the initiality of \(\fix\) in the category of fixed points of \(F\) requires some additional steps:
+  \begin{enumerate}
+    \item First, another cocone \((B,\nu)\) for \(\Delta{}\) is built, with
+    \begin{equation*}
+      \nu_n =
+      \begin{cases}
+        \text{the unique morphism}\: \bot \to B & n = 0 \\
+        \beta \circ F(\nu_{n-1}) & n \ge 1;
+      \end{cases}
+    \end{equation*}
+    \item The mediating morphism \(\xi \colon (A,\mu) \to (B, \nu)\) is then shown to be a morphism of fixed points from \(\fix\) to \((B,\beta)\), specifically, \(\xi = \beta \circ F(\xi) \circ \alpha^{-1}\);
+    \item Finally, it is proved that \(\xi{}\) is the unique morphism from \(\fix\) to \((B,\beta)\).
+  \end{enumerate}
+\end{proof}
+%
+% \subsection{Summary}
+%
+% \begin{tabular}{cc}
+%   \toprule
+%   Posets & Categories \\
+%   \midrule
+%   Monotonic functions & Functors \\
+%   Continuous functions & Colimit--preserving functors \\
+%
+%   Order relation & Morphisms \\
+%   Least elements & Initial objects \\
+%   Upper bounds & Co--cones \\
+%   lubs & Co--limits \\
+%   \bottomrule
+% \end{tabular}
