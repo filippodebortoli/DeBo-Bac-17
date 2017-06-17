@@ -154,8 +154,8 @@ Finally, we define the \emph{arrow} functor
 \end{equation*}
 
 \paragraph{The ``product'' functor.}
-Let \((\times) \colon \mathcal{C} \times \mathcal{C} \to \mathcal{C}\) be the functor which maps object \((X,Y)\) to the cartesian product \(X \times Y\) and morphism \((f,g) \colon (X,X') \to (Y,Y')\) to
-\((\times)(f,g) := (x,y) \mapsto (f(x),g(y))\), where \((x,y) \in X \times Y\).
+Let \((\times) \colon \mathcal{C} \times \mathcal{C} \to \mathcal{C}\) be the functor which maps object \((A,B)\) to their cartesian product \(A \times B\) and morphism \((f,g) \colon (A,A') \to (B,B')\) to
+\((\times)(f,g) := (a,b) \mapsto (f(a),g(b))\), where \((a,b) \in X \times Y\).
 From the \(\omega\)--continuity of \(f\) and \(g\), comes that \((\times)\) is locally continuous, hence it induces a functor
 \({(\times)}^\textup{E} \colon {(\mathcal{C} \times \mathcal{C})}^\textup{E} \to \mathcal{C}^\textup{E}\).
 Thanks to Proposition~\ref{iso:prod} we can define a functor
@@ -168,7 +168,28 @@ Thanks to Proposition~\ref{iso:prod} we can define a functor
 \end{equation*}
 
 \paragraph{The ``separated sum'' functor.}
-Let \((+) \colon \mathcal{C} \times \mathcal{C} \to \mathcal{C}\) be the functor defined by:
+Let \(\oplus \colon \mathcal{C} \times \mathcal{C} \to \mathcal{C}\) be the functor which maps two objects into their coproduct and two morphisms into their copairing, i.e.
+\begin{align*}
+  (A,B) &\mapsto A \oplus B := (\lbrace 0 \rbrace \times A) \cup (\lbrace 1 \rbrace \times B) \\
+  (f,g) &\mapsto [f,g](x) :=
+  \begin{cases}
+    f(a) & x = (0,a) \\ g(b) & x = (1,b)
+  \end{cases}
+\end{align*}
+Remember that this can be diagrammatically represented as the commuting diagram
+\begin{center}
+  \begin{tikzcd}
+    A \arrow[r, "i_A"] \arrow[dr, "f"]%
+    & A \oplus B \arrow[d, "{\exists ! [f,g]}" description]%
+    & B \arrow[l, "i_B"] \arrow[dl, "g"] \\
+    & C &
+  \end{tikzcd}
+\end{center}
+Similarly to the previous example, we can claim that \(\oplus\) is a locally continuous functor and that we can induce an \(\omega\)--cocontinuous functor
 \begin{equation*}
-  (X,Y) \mapsto \lbrace 0 \rbrace \times X \cup \lbrace 1 \rbrace \times Y \cup \lbrace \bot \rbrace
+  \begin{split}
+    \oplus \colon \mathcal{C}^\textup{E} \times \mathcal{C}^\textup{E} &\to \mathcal{C}^\textup{E} \\
+    (A,B) &\mapsto A \times B \\
+    (f,g) &\mapsto ((a,b) \mapsto (f(a),g(b))).
+\end{split}
 \end{equation*}
