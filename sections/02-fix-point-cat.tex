@@ -1,8 +1,7 @@
 \section{Fixed point theory for categories}\label{sec-2}
 
-Category theory provides an appropriate and very general framework for studying
-recursive equations of the form \(D \simeq F(D)\), where \(D\) ought to be an
-\(\omega{}\)--cpo or a similar structure and \(F\) prescribes a way of
+Category theory provides a very general framework for studying
+recursive equations of the form \(D \simeq F(D)\), where \(D\) ought to be a domain of some kind, while \(F\) prescribes a way of
 combining objects of these kinds.
 In this section, some notions of category theory are introduced.
 Then, a solution method for recursive domain equations is presented, as a
@@ -119,8 +118,8 @@ This can be achieved by considering the category \(\mathcal{U}_\Delta\), which o
   \mathcal{U}_\Delta((A,\alpha),(B,\beta)) := \lbrace f \colon A \to B \mid
   \forall n \in \mathbb{N}.\,\beta_n = \alpha_n \circ f \rbrace;
 \end{equation*}
-the initial object \((A, \alpha)\) of this category is called a \emph{colimit} of \(\Delta\), while the unique morphism from \((D,\delta)\) to each \(\Delta\)--cocone \((B, \beta)\) is said \emph{mediating}. %chktex 21
-A diagrammatical representation of a colimit is the following:
+the initial object \((A, \alpha)\) of this category is called a \emph{colimit} of \(\Delta\), while the unique morphism from \((A,\alpha)\) to each \(\Delta\)--cocone \((B, \beta)\) is said \emph{mediating}. %chktex 21
+A diagrammatical representation of a colimit is the following\footnote{Here, only a part of the diagram has been visualized; however, \(f\) acts on each morphism of \(\langle \alpha_n \rangle_n\) and \(\langle \beta_n \rangle_n\)}:
 \begin{center}
   \begin{tikzcd}
     D_0 \arrow[r, "f_0"] &%chktex 18
@@ -132,12 +131,13 @@ A diagrammatical representation of a colimit is the following:
     D_{n+1} \arrow[r]%
             \arrow[dl, "\alpha_{n+1}" description]%%chktex 18
             \arrow[ddl, "\beta_{n+1}" description] & \dots{}\\%chktex 18
-    & & & & A \arrow[d, "{\exists! f}" description]& \\%chktex 18
+    & & & \dots & A \arrow[d, dashed, "f"]& \dots{}\\%chktex 18
     & & & & B &
   \end{tikzcd}
 \end{center}
-Similarly to initial objects, colimits are unique up to isomorphism.
+Due to their definition as initial objects of \(\mathcal{U}_\Delta\), colimits are unique up to isomorphism. %chktex 21
 Now, all the elements are given, in order to introduce the categorical structure replacing the \(\omega\)--cpos. %chktex 21
+The definition given below is taken from~\cite{Hemerik1988}
 
 \begin{dfn}
   An \emph{\(\omega\)--cocomplete} category is a category which has initial objects and in which each \(\omega\)--chain has a colimit. %chktex 21
@@ -159,11 +159,11 @@ Moving to category theory, one may consider transformations that preserve some s
   \end{enumerate}
 \end{dfn}
 
-\begin{rem}
-  Let \textsc{cat} be the category which objects are categories and morphisms are functors. This enables us to affirm that two categories are \emph{isomorphic} whenever they are related by a iso functor in \textsc{cat}.
-\end{rem}
+% \begin{rem}
+%   Let \textsc{cat} be the category which objects are categories and morphisms are functors. This enables us to affirm that two categories are \emph{isomorphic} whenever they are related by a iso functor in \textsc{cat}.
+% \end{rem}
 
-Then, as continuous function over \(\omega\)--cpos map least upper bounds to least upper bounds, so it should be required for a functor to map colimits to colimits. This justifies the following definition. %chktex 21
+Then, as continuous functions over \(\omega\)--cpos map suprema to suprema, so it should be required for a functor to map colimits to colimits. This justifies the following definition. %chktex 21
 
 \begin{dfn}
   A functor \(F \colon \mathcal{C} \to \mathcal{L}\) is \emph{\(\omega\)--cocontinuous} iff it preserves colimits: that is, given an \(\omega\)--chain \({\langle (D_n,f_n) \rangle}_{n \in \mathbb{N}}\) in \(\mathcal{C}\) with colimit \((D,\delta)\), the tuple \((F(D),F(\delta))\) is a colimit for the \(\omega\)--chain \({\langle (F(D_n),F(f_n))\rangle}_{n \in \mathbb{N}}\) in \(\mathcal{L}\). %chktex 21
@@ -182,7 +182,7 @@ To conclude the transfer from order theory to category theory, we provide the co
 
 \subsection{The initial fixed point theorem}
 
-\(F\)--algebras, as should be expected from most of the mathematical objects introduced so far, can be thought of as objects of a category, which morphisms are constructed in the following way: given two \(F\)--algebras \((A,\alpha)\) and \((B,\beta)\), a \emph{\(F\)--homomorphism} from \((A,\alpha)\) to \((B,\beta)\) is an arrow \(f\) such that
+\(F\)--algebras, as should be expected from most of the mathematical objects introduced so far, can be thought of as objects of a category, whose morphisms are constructed in the following way: given two \(F\)--algebras \((A,\alpha)\) and \((B,\beta)\), a \emph{\(F\)--homomorphism} from \((A,\alpha)\) to \((B,\beta)\) is an arrow \(f\) such that
 \begin{center}
   \begin{tikzcd}
     F(A) \arrow[r, "\alpha"] \arrow[d, "F(f)"]%chktex 18
@@ -211,20 +211,22 @@ Now, a generalisation of Lemma~\ref{lem:cpo-prefixed} is asserted and proved.
  commutes, because:
   \begin{description}
     \item[left cell] the arrow \(!{}\) is an \(F\)--homomorphism;
-    \item[right cell] we can interpret \(\alpha{}\) as an \(F\)--homomorphism from \((F(A),F(\alpha))\) to \((A,\alpha)\).
+    \item[right cell] trivially commutes.
   \end{description}
   Next, we claim that \(!{}\) is the two--sided inverse of \(\alpha{}\), since %chktex 8
   \begin{align*}
     \alpha \circ ! &= 1_A \\
     ! \circ \alpha &= F(\alpha) \circ F(!) = F (\alpha \circ !) = F(1_A) = 1_{F(A)}.
   \end{align*}
+  The first equality holds, because of the initiality of \((A,\alpha)\): this implies that there is a unique endomorphism over \((A,\alpha)\); the identity morphism is required to exist for each object in a category, thus the identity is the unique endomorphism over \((A,\alpha)\).
   Lastly, we can say that \(\alpha{}\) is an isomorphism.
 \end{proof}
 
 The main result of this section is the ``initial fixed point'' theorem, which generalizes what was stated in Theorem~\ref{thm:cpo-fixed}.
 
 \begin{thm}[initial fixed point theorem]\label{thm:init}
-  Let \(\mathcal{C}\) be a complete category, \(F\) an \(\omega{}\)--cocontinuous endofunctor over \(\mathcal{C}\) and \(\bot{}\) an initial object of \(\mathcal{C}\). If \(!{}\) is the unique morphism from \(\bot{}\) to \(F(\bot{})\), then
+  Let \(\mathcal{C}\) be an \(\omega\)--cocomplete category, \(F\) an \(\omega{}\)--cocontinuous endofunctor over \(\mathcal{C}\) and \(\bot{}\) an initial object of \(\mathcal{C}\). %chktex 21
+  If \(!{}\) is the unique morphism from \(\bot{}\) to \(F(\bot{})\), then
   \begin{equation}
     \Delta := {\langle(F^n(\bot),F^n(!))\rangle}_{n \in \mathbb{N}}
   \end{equation}
@@ -234,7 +236,7 @@ The main result of this section is the ``initial fixed point'' theorem, which ge
   Here, a brief idea of the proof is given. For details, see~\cite{Hemerik1988}.
   To prove that \(\Delta{}\) is an \(\omega{}\)--chain, one should proceed by induction on \(n \in \mathbb{N}\), showing that \(F^n(!) \in \mathcal{C}(F^n(\bot),F^{n+1}(\bot))\).
 
-  Next, to see that with each \(\Delta\)--colimit \((A,{\langle\mu_n \rangle}_{n\in\mathbb{N}})\) comes an isomorphism \(\alpha \colon F(A) \to A\) such that \((A,\alpha)\) is an \(F\)--algebra, it is needed to observe that both \((A,{\langle \mu_{n+1} \rangle}_{n\in\mathbb{N}})\) and \((F(A),{\langle\mu_n \rangle}_{n\in\mathbb{N}})\) are colimits of \(\Delta \setminus (\bot,!)\).
+  Next, to see that with each \(\Delta\)--colimit \((A,{\langle\mu_n \rangle}_{n\in\mathbb{N}})\) comes an isomorphism \(\alpha \colon F(A) \to A\) such that \((A,\alpha)\) is an \(F\)--algebra, it is needed to observe that both \((A,{\langle \mu_{n+1} \rangle}_{n\in\mathbb{N}})\) and \((F(A),{\langle\mu_{n+1} \rangle}_{n\in\mathbb{N}})\) are colimits of \(\Delta \setminus (\bot,!)\).
   Thanks to this, the mediating morphism \(\alpha{}\) between the two colimits is the desired isomorphism.
 
   Let \((B,\beta)\) be another fixed point of \(F\). The proof of the initiality of \(\fix\) in the category of fixed points of \(F\) requires some additional steps:

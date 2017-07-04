@@ -59,11 +59,11 @@ In a similar fashion, it is possible to define \(\mathcal{C}^\textup{P}\), the s
 A first, important result, concerning colimits in \(\mathbf{O}\)--categories, is stated in the initiality theorem, that provides a simple way to check whether a cocone is a colimit in a subclass of \(\mathbf{O}\)--categories.
 
 \begin{lem}\label{lem:3-1}
-  Let \(\mathcal{C}\) be an \(\mathbf{O}\)--category, \(\Delta\) an \(\omega\)--chain in \(\mathcal{C}^\textup{E}\) and \((D,\alpha)\), \((E,\beta)\) two \(\Delta\)--cocones. %chktex 21
+  Let \(\mathcal{C}\) be an \(\mathbf{O}\)--category, \(\Delta = {\langle (D_n, f_n) \rangle}_{n \in \mathbb{N}}\) an \(\omega\)--chain in \(\mathcal{C}^\textup{E}\) and \((D,\alpha)\), \((E,\beta)\) two \(\Delta\)--cocones. %chktex 21
   Then, the following facts hold:
   \begin{enumerate}
-    \item \(\lbrace \alpha_n \circ \beta_n^\star \rbrace_{n \in \mathbb{N}}\) is an ascending \(\omega\)--chain in \(\mathcal{C}(E,D)\); %chktex 21
-    \item if \(f = \bigsqcup_{n \in \mathbb{N}}(\alpha_n \circ \beta_n^\star)\), then \(f\) is a morphisms of cocones:
+    \item \({\langle \alpha_n \circ \beta_n^\star \rangle}_{n \in \mathbb{N}}\) is an ascending \(\omega\)--chain in \(\mathcal{C}(E,D)\); %chktex 21
+    \item if \(f = \bigsqcup_{n \in \mathbb{N}}(\alpha_n \circ \beta_n^\star)\), then \(f\) is a morphisms of cocones from \((E,\beta)\) to \((D,\alpha)\):
     \begin{equation*}
       \forall n \in \mathbb{N}.\: f \circ \beta_n = \alpha_n.
     \end{equation*}
@@ -89,8 +89,8 @@ A first, important result, concerning colimits in \(\mathbf{O}\)--categories, is
       \bigsqcup_{i \in \mathbb{N}}(\alpha_i \circ \beta_i^\star) \circ \beta_n
       = \bigsqcup_{i \ge n}(\alpha_i \circ \beta_i^\star) \circ \beta_n \\
       &= \bigsqcup_{i \ge n}(\alpha_i \circ \beta_i^\star \circ \beta_n)
-      = \bigsqcup_{i \ge n}(\alpha_i \circ \beta_i^\star \circ \beta_i \circ f_i \circ f_{i+1} \circ \dotsc \circ f_n) \\
-      &= \bigsqcup_{i \ge n}(\alpha_i \circ f_i \circ f_{i+1} \circ \dotsc \circ f_n)
+      = \bigsqcup_{i \ge n}(\alpha_i \circ \beta_i^\star \circ \beta_i \circ f_i \circ f_{i-1} \circ \dotsc \circ f_n) \\
+      &= \bigsqcup_{i \ge n}(\alpha_i \circ f_i \circ f_{i-1} \circ \dotsc \circ f_n)
       = \bigsqcup_{i \ge n}(\alpha_n) = \alpha_n.
     \end{split}
   \end{equation*}\qedhere
@@ -125,7 +125,7 @@ Is it possible to make additional claims, if equality is reached?
   The equalities marked with \(\bullet\) are justified from the \(\omega\)--continuity of the composition, while \(\dagger\) follows from the hypothesis. %chktex 21
 
   As already seen in Lemma~\ref{lem:3-1}, \(f\) is a morphism of cocones.
-  Now, what is left is proving that \(f\) is the unique morphism from \((D,\alpha)\) to \((E,\beta)\) such that, for all \(n \in \mathbb{N}\), \(f \circ \alpha_n = \beta_n\).
+  Now, what is left to prove is that \(f\) is the unique morphism from \((D,\alpha)\) to \((E,\beta)\), i.e. the unique morphism \(D\to E\)  such that, for all \(n \in \mathbb{N}\), \(f \circ \alpha_n = \beta_n\).
   Let \(\eta\) be another such morphism. Then, %chktex 21
   \begin{equation*}
     \begin{split}
@@ -146,13 +146,7 @@ It would be desirable to have a converse result, with respect to Theorem~\ref{th
   \end{equation*}
 \end{dfn}
 
-Being \((g,g^\star)\) a projection pair, \(g \circ g^\star \sqsubseteq 1_D\) vacuously holds. If the limit--case \(g \circ g^\star = 1_D\) is reached, then \(E\) and \(D\) are isomorphic and \(g^\star = g^{-1}\). %chktex 8
-Conversely, if \((g,g^\star)\) has an inverse \(\eta\), i.e. \((g,g^\star) \circ (\eta,\eta^\star) = (1_D,1_D)\), then %chktex 21
-\begin{equation*}
-    1_D = 1_D \circ 1_D = g \circ \eta \circ \eta^\star \circ g^\star
-    \sqsubseteq g \circ g^\star;
-\end{equation*}
-this, jointly with \(g \circ g^\star \sqsubseteq 1_D\), leads to \(g \circ g^\star = 1_D\).
+Being \((g,g^\star)\) a projection pair, \(g \circ g^\star \sqsubseteq 1_D\) vacuously holds. What if \(g \circ g^\star = 1_D\)?
 
 \begin{thm}[Initiality theorem]\label{thm:3-2}
   Let \(\mathcal{C}\) be a localized \(\mathbf{O}\)--category.
@@ -163,13 +157,21 @@ this, jointly with \(g \circ g^\star \sqsubseteq 1_D\), leads to \(g \circ g^\st
     \item \(\bigsqcup_{n \in \mathbb{N}}(\alpha_n \circ \alpha_n^\star) = 1_D\).
   \end{enumerate}
 \end{thm}
-\begin{proof}
+\begin{proof}[Proof Outline]
+  The implication \(2 \to 1\) had already been proved in Theorem~\ref{thm:3-1}.
   Let \(E \in \obj{\mathcal{C}}\) and \(g \in \mathcal{C}^\textup{E}(E,D)\) such that \(\bigsqcup_{n \in \mathbb{N}}(\alpha_n \circ \alpha_n^\star) = g \circ g^\star\). %chktex 21
   To prove that \(g \circ g^\star = 1_D\), we should proceed in the following way:
   \begin{enumerate}
     \item By defining, for all \(n \in \mathbb{N}\), the morphism \(\beta_n := g \circ \alpha_n\), we should verify that \(\beta_n\) is indeed an embedding from \(D_n\) to \(E\) and that \((E,\beta)\) is a \(\Delta\)--cocone. %chktex 21
     \item After that, we should notice that the mediating morphism \(\eta \colon D \to E\) is the inverse of \(g\), i.e. \(g \circ \eta = 1_D\).
-    This allows us to conclude that \(g \circ g^\star = 1_D\). \qedhere
+    This allows us to conclude that \(g \circ g^\star = 1_D\).
+    Indeed, if the limit--case \(g \circ g^\star = 1_D\) is reached, then \(E\) and \(D\) are isomorphic and \(g^\star = g^{-1}\). %chktex 8
+    Conversely, if \((g,g^\star)\) has an inverse \(\eta\), i.e. \((g,g^\star) \circ (\eta,\eta^\star) = (1_D,1_D)\), then %chktex 21
+    \begin{equation*}
+        1_D = 1_D \circ 1_D = g \circ \eta \circ \eta^\star \circ g^\star
+        \sqsubseteq g \circ g^\star;
+    \end{equation*}
+    this, jointly with \(g \circ g^\star \sqsubseteq 1_D\), leads to \(g \circ g^\star = 1_D\). \qedhere
   \end{enumerate}
 \end{proof}
 

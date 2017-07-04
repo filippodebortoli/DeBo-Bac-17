@@ -27,13 +27,13 @@ Perhaps, the most striking consequence is that, from every contravariant functor
   \end{equation*}
   then, the conclusion is reached by observing that \({(\mathcal{C}^\textup{op})}^\textup{op} = \mathcal{C}\), which gives the inverse \(S^{-1} \colon {(\mathcal{C}^\textup{op})}^\textup{E} \to \mathcal{C}^\textup{E}\).
 
-  Finally, going back to~\ref{dfn:localized}, let \(f\) be an embedding in \(\mathcal{C}\) such that \(\bigsqcup_n(\alpha_n \circ \alpha_n^\star) = f \circ f^\star\). Then, %chktex 21
+  Finally, going back to Definition~\ref{dfn:localized} --- about localized categories ---, let \(f\) be an embedding in \(\mathcal{C}\) such that \(\bigsqcup_n(\alpha_n \circ \alpha_n^\star) = f \circ f^\star\). Then, %chktex 21
   \begin{equation*}
     \bigsqcup_n(\alpha_n \circ \alpha_n^\star) =
     \bigsqcup_n(S(\alpha_n) \bullet S(\alpha_n^\star)) =
     f^\star \bullet f = f \circ f^\star.
   \end{equation*}
-  Being \((S(D),S(\alpha))\) a \(S(\Delta)\)--colimit and \(f^\star\) an embedding in \(\mathcal{C}^\textup{op}\), we have proved that \(\mathcal{C}^\textup{op}\) is localized. \qedhere %chktex 21
+  Since \(S\) is an isomorphism, being \((D,\alpha)\) a \(\Delta\)--colimit, \((S(D),S(\alpha))\) is a \(S(\Delta)\)--colimit; moreover, \(f^\star\) is an embedding in \(\mathcal{C}^\textup{op}\), thus we have proved that \(\mathcal{C}^\textup{op}\) is localized. \qedhere %chktex 21
 \end{proof}
 
 We can additionally state that \({(\mathcal{C}^\textup{E})}^\textup{op}\) is isomorphic to \(\mathcal{C}^\textup{P}\).
@@ -82,8 +82,8 @@ is a functor with inverse \(S_{1}^{-1}\) mapping each projection in \(\mathcal{C
   \begin{equation*}
     \begin{split}
       g_1 \circ g_1^\star &= \bigsqcup_{n \ge 0}(\pi_1^\textup{E}(\alpha_n) \circ {\pi_1^{\textup{E}}}^\star(\alpha_n))
-      = \bigsqcup_{n \ge 0}(\pi_1(\alpha_n\circ \alpha_n^\star)) \\
-      &= \pi_1\left(\bigsqcup_{n \ge 0}(\alpha_n\circ \alpha_n^\star)\right).
+      = \bigsqcup_{n \ge 0}(\pi_1^\textup{E}(\alpha_n\circ \alpha_n^\star)) \\
+      &= \pi_1^\textup{E}\left(\bigsqcup_{n \ge 0}(\alpha_n\circ \alpha_n^\star)\right).
     \end{split}
     \end{equation*}
   In a similar way, we obtain an embedding \(g_2\) in \(\mathcal{L}\) satisyfing those conditions.
@@ -110,13 +110,14 @@ Moreover, we will observe that \(\mathrm{\textsc{cl}}^\textup{E}\) is \(\omega\)
 \end{dfn}
 
 \begin{prp}
-  \textsc{CL} is a localized \(\mathbf{O}\)--category.
+  \textsc{cl} is a localized \(\mathbf{O}\)--category.
 \end{prp}
 \begin{proof}
   Let \((D, \lhd)\) be a complete lattice.
   Given a d--continuous and idempotent function \(f \colon D \to D\), let \(E := f(D)\) and \(<\) the restriction of \(\lhd\) to \(E\). %chktex 21 chktex 8
   Then, \((E,<)\) is a poset. For any directed subset \(B \subseteq E\), thanks to \(D\) being a cl, we obtain that \(\sqcup B \in D\).
-  Noticing that \(f\) acts as the identity over \(E\) --- it is idempotent ---, by using Knaster--Tarski we deduce that \(\sqcup B \in E\) and \(\sqcup_D B = \sqcup_E B\). %chktex 8
+  Noticing that \(f\) acts as the identity over \(E\) --- it is idempotent --- %, by using Knaster--Tarski
+  we deduce that \(\sqcup B \in E\) and \(\sqcup_D B = \sqcup_E B\). %chktex 8
   Going on,
   \begin{equation*}
     \sqcup B = \sqcup f(B) = f(\sqcup B) \in E.
@@ -132,7 +133,7 @@ The functors which we are going to define are essential for the specification of
 \paragraph{The ``arrow'' functor.}
 Let \((\rightarrow) \colon \mathcal{C}^\textup{op} \times \mathcal{C} \to \mathcal{C}\) defined as follows:
 \begin{align*}
-    (\rightarrow)(X,Y) &:= \mathcal{C}(X,Y) \\
+    (\rightarrow)(X,Y) &:= \mathcal{C}(X,Y),\;\text{pointwise--ordered;}\\
     \intertext{Given two morphisms \(f \colon X' \to X\), \(g \colon Y \to Y'\),}
     (\rightarrow)(f,g) &\colon
       \mathcal{C}(X,Y) \to \mathcal{C}(X',Y'), \;

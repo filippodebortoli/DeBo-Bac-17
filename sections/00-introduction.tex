@@ -1,36 +1,45 @@
 \section{Introduction}
 
-\nocite{Winskel1993}
 \nocite{Hemerik1988}
 
-In denotational semantics, as well as in type theory, recursive specifications play a crucial role in establishing what can be achieved by the described programming languages.
-
-% Recursive domain equations arise in many areas of denotational semantics and type theory, two of the mathematical fields that lay down the theoretical foundations of programming languages.
-%
-A common situation we may be faced with is that of recursion over \emph{values}: indeed, most of programming languages allow recursive programs, such as
-\begin{displayquote}
-  \texttt{P(n) = if n = 0 then 1 else nP(n-1);}
-\end{displayquote}
-which defines \(f \colon \mathbb{N} \to \mathbb{N}\) as \(f(n) := n!\).
-In this context, mathematical structures like \(\omega\)--cpos permit to formalize this kind of recursion.
-Here, this is achieved by defining the program as the least fixed point of the function
+Recursive domain equations hold a prominent role in denotational semantics, as well as in the field of domain theory.
+Broadly speaking, recursive specifications are an essential feature of many programming languages, that can benefit from them in many ways.
+%In denotational semantics, as well as in type theory, recursive specifications play a crucial role in establishing what can be achieved by the described programming languages.
+%% Recursive domain equations arise in many areas of denotational semantics and type theory, two of the mathematical fields that lay down the theoretical foundations of programming languages.
+A first situation one may be faced with is that of \emph{recursion over values}: for example, a great number of programming languages permit the implementation of recursive functions (or programs), such as
+\begin{center}
+  \texttt{P(n) := if (n = 0) then 1 else n * P(n - 1);}
+\end{center}
+which encodes the factorial function \(f(n) = n!\).
+%A common situation we may be faced with is that of recursion over \emph{values}: indeed, most of programming languages allow recursive programs, such as
+%\begin{displayquote}
+%  \texttt{P(n) = if n = 0 then 1 else nP(n-1);}
+%\end{displayquote}
+%which defines \(f \colon \mathbb{N} \to \mathbb{N}\) as \(f(n) := n!\).
+In order to formalize this kind of recursion, mathematical structure like \(\omega\)--cpos can be used. In fact, several fundamental results had been stated, that allow the construction of a canonical solution for recursive equations over \(\omega\)--cpos, as explained in~\cite{Winskel1993}.
+%In this context, mathematical structures like \(\omega\)--cpos permit to formalize this kind of recursion.
+Here, \(f\) is defined as the least fixed point of the function
 \begin{equation*}
   \begin{split}
-    g \colon (\mathbb{N} \rightharpoonup \mathbb{N}_\bot) &\to (\mathbb{N} \rightharpoonup \mathbb{N}_\bot) \\
+    g \colon (\mathbb{N} \rightharpoonup \mathbb{N}) &\to (\mathbb{N} \rightharpoonup \mathbb{N}) \\
+    %g \colon (\mathbb{N} \to \mathbb{N}_\bot) &\to (\mathbb{N} \to \mathbb{N}_\bot) \\
     g(h) &= \left(n \mapsto \begin{cases}1 & n = 0 \\ n\cdot h(n-1) & n > 0\end{cases}\right)
   \end{split}
 \end{equation*}
+that is --- thanks to Kleene's fixed point theorem --- the function
+\begin{align*}
+  f = \bigcup_{n\in\mathbb{N}}g^n(\emptyset) &= \emptyset \cup g(\emptyset) \cup g(g(\emptyset)) \cup \dotsc \\
+  &= \lbrace (0,1), (1,1), (2,2), \dotsc \rbrace.
+\end{align*}
 
-Another scenario that frequently arises is that of a typed programming language which includes recursive specifications of datatypes.
+Another scenario that frequently arises is that of a typed programming language, which includes \emph{recursive specifications of datatypes}.
 While basic types, like natural numbers or boolean values, can be easily modelled according to set theory, recursive datatypes do not generally fit into this theory.
 For example, given a type \(A\),
-\begin{equation*}
-  X_A = X_A \to A,
-\end{equation*}
+\(X_A = X_A \to A,\)
 the recursive type of auto--applying functions returning a term in \(A\), cannot be a set if \(\lvert A \rvert \ge 2\), due to Cantor's theorem.
 As we would like to take the ``least fixed point'' in this case, a more general and appropriate mathematical framework is needed.
 
-Category theory, where type theory can be used as a syntactical tool to describe the construction of objects and morphisms, has been thereby used to extend the classical least fixed point theory over \(\omega\)--cpos to other classes of domains.
+Category theory, where type theory can be used as a syntactical tool to describe the construction of objects and morphisms, has been thereby used to extend the classical least fixed point theory over \(\omega\)--cpos to other classes of domains. One of the greatest results in this area had been made by Lambek with the initial algebra theorem.
 % A common situation may be that of a typed programming language featuring some basic types, for example, the set of natural numbers \(\mathbb{N}\) or the set of truth values \(\mathbb{B} = \lbrace \mathbb{F}, \mathbb{T} \rbrace\), and some compound ones, like the product type \(A \times B\), with \(A\) and \(B\) simple types. %chktex 21
 % There exist suitable mathematical structures, which allow us to effectively describe recursively--defined programs in terms of fixed points of a function \(f\) ranging over a meaning domain \(D\); \(\omega\)--cpos have been the prevalent choice for some time, when dealing with recursion over \emph{values}.
 %
@@ -43,5 +52,42 @@ Category theory, where type theory can be used as a syntactical tool to describe
 % If \(\lvert A \rvert \ge 2\), then \(X_A\) cannot be a set, due to Cantor's theorem --- indeed, \(\lvert X_A \rvert \ge 2^{\lvert X_A \rvert}\) is false whenever \(X_A\) is a set.
 %
 % A viable and powerful way to solve recursive domain equations is provided by category theory, which builds upon least fixed point theory over \(\omega\)--cpos to provide a canonical construction for the solution of those equations.
-In the next chapters, we are going to review the main results of fixed point theory for \(\omega\)--cpos and categories; then, we will introduce \(\mathbf{O}\)--categories and embedding--projection pairs and we will show how a least fixed point can be taken in this framework.
-Finally, we will discuss some isomorphic relations arising in some \(\mathbf{O}\)--categories and show how desirable features of programming languages find a natural place in the theory we presented.
+In the first and second sections, the main results of fixed point theory for \(\omega\)--cpos and categories is reviewed; in the third section, \(\mathbf{O}\)--categories are introduced along with embedding--projection pairs and a canonical construction of the least fixed point of a recursive equation in this framework is shown as in~\cite{Smyth1982}.
+Finally, some isomorphisms arising between certain subcategories of \(\mathbf{O}\)--categories are discussed and examples of how desirable features of programming languages find a natural place in this theory are exhibited.
+%
+% In the next chapters, we are going to review the main results of fixed point theory for \(\omega\)--cpos and categories; then, we will introduce \(\mathbf{O}\)--categories and embedding--projection pairs and we will show how a least fixed point can be taken in this framework.
+% Finally, we will discuss some isomorphic relations arising in some \(\mathbf{O}\)--categories and show how desirable features of programming languages find a natural place in the theory we presented.
+%
+% In this context, mathematical structures like \(\omega\)--cpos permit to formalize this kind of recursion.
+% Here, this is achieved by defining the program as the least fixed point of the function
+% \begin{equation*}
+%   \begin{split}
+%     g \colon (\mathbb{N} \rightharpoonup \mathbb{N}_\bot) &\to (\mathbb{N} \rightharpoonup \mathbb{N}_\bot) \\
+%     g(h) &= \left(n \mapsto \begin{cases}1 & n = 0 \\ n\cdot h(n-1) & n > 0\end{cases}\right)
+%   \end{split}
+% \end{equation*}
+%
+% Another scenario that frequently arises is that of a typed programming language which includes recursive specifications of datatypes.
+% While basic types, like natural numbers or boolean values, can be easily modelled according to set theory, recursive datatypes do not generally fit into this theory.
+% For example, given a type \(A\),
+% \begin{equation*}
+%   X_A = X_A \to A,
+% \end{equation*}
+% the recursive type of auto--applying functions returning a term in \(A\), cannot be a set if \(\lvert A \rvert \ge 2\), due to Cantor's theorem.
+% As we would like to take the ``least fixed point'' in this case, a more general and appropriate mathematical framework is needed.
+%
+% Category theory, where type theory can be used as a syntactical tool to describe the construction of objects and morphisms, has been thereby used to extend the classical least fixed point theory over \(\omega\)--cpos to other classes of domains.
+% % A common situation may be that of a typed programming language featuring some basic types, for example, the set of natural numbers \(\mathbb{N}\) or the set of truth values \(\mathbb{B} = \lbrace \mathbb{F}, \mathbb{T} \rbrace\), and some compound ones, like the product type \(A \times B\), with \(A\) and \(B\) simple types. %chktex 21
+% % There exist suitable mathematical structures, which allow us to effectively describe recursively--defined programs in terms of fixed points of a function \(f\) ranging over a meaning domain \(D\); \(\omega\)--cpos have been the prevalent choice for some time, when dealing with recursion over \emph{values}.
+% %
+% % However, there are also programming languages that permit a recursive specification of data types, through fixed--point equations, thus introducing recursion over \emph{domains}
+% % A meaningful example is provided by the equation
+% % \begin{equation*}
+% %   X_A = X_A \to A
+% % \end{equation*}
+% % which describes auto--applying functions over a domain \(A\).
+% % If \(\lvert A \rvert \ge 2\), then \(X_A\) cannot be a set, due to Cantor's theorem --- indeed, \(\lvert X_A \rvert \ge 2^{\lvert X_A \rvert}\) is false whenever \(X_A\) is a set.
+% %
+% % A viable and powerful way to solve recursive domain equations is provided by category theory, which builds upon least fixed point theory over \(\omega\)--cpos to provide a canonical construction for the solution of those equations.
+% In the next chapters, we are going to review the main results of fixed point theory for \(\omega\)--cpos and categories; then, we will introduce \(\mathbf{O}\)--categories and embedding--projection pairs and we will show how a least fixed point can be taken in this framework.
+% Finally, we will discuss some isomorphic relations arising in some \(\mathbf{O}\)--categories and show how desirable features of programming languages find a natural place in the theory we presented.
