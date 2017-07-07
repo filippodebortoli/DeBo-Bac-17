@@ -16,7 +16,7 @@
 
 %%% Document-related packages. %%%
 %\usepackage[nowrite,signatures]{frontespizio}
-\usepackage[signatures]{frontespizio}
+\usepackage[sans, signatures, swapnames]{frontespizio}
 %\usepackage[]{geometry}
 \usepackage{microtype}
 
@@ -57,8 +57,10 @@
 \begin{document}
 
   \begin{frontespizio}
-    \Preambolo{\usepackage[sc,osf]{mathpazo}}
+    \Preambolo{\usepackage{helvet}}
+    %\Preambolo{\usepackage[sc,osf]{mathpazo}}
     \Universita{Trento}
+    \Logo[4cm]{logo-unitn}
     %\Facolta{Scienze Matematiche, Fisiche e Naturali}
     \Dipartimento{Matematica}
     \Corso[Laurea]{Matematica}

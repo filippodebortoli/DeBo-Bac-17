@@ -181,7 +181,7 @@ Remember that this can be diagrammatically represented as the commuting diagram
 \begin{center}
   \begin{tikzcd}
     A \arrow[r, "i_A"] \arrow[dr, "f"]%
-    & A \oplus B \arrow[d, "{\exists ! [f,g]}" description]%
+    & A \oplus B \arrow[d, dashed, "{[f,g]}"] % description]%
     & B \arrow[l, "i_B"] \arrow[dl, "g"] \\
     & C &
   \end{tikzcd}
@@ -190,7 +190,7 @@ Similarly to the previous example, we can claim that \(\oplus\) is a locally con
 \begin{equation*}
   \begin{split}
     \oplus \colon \mathcal{C}^\textup{E} \times \mathcal{C}^\textup{E} &\to \mathcal{C}^\textup{E} \\
-    (A,B) &\mapsto A \times B \\
-    (f,g) &\mapsto ((a,b) \mapsto (f(a),g(b))).
+    (A,B) &\mapsto A \oplus B \\
+    (f,g) &\mapsto [f,g].
 \end{split}
 \end{equation*}

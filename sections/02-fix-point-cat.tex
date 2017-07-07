@@ -14,12 +14,13 @@ systematic generalisation of the theory outlined in Section~\ref{sec-1}.
   \begin{enumerate}
     \item a class \(\obj{\mathcal{C}}\), containing its \emph{objects};
     \item for each \(A, B \in \obj{\mathcal{C}}\),
-    a set \(\mathcal{C}(A,B)\) of the \emph{morphisms} from \(A\) to \(B\), also called \emph{hom--set}; %chktex 8
-    \item for each \(A,B,C \in \obj{\mathcal{C}}\), an associative map
+    a class \(\mathcal{C}(A,B)\) of the \emph{morphisms} from \(A\) to \(B\), also called \emph{hom--set}; %chktex 8
+    \item for each \(A,B,C \in \obj{\mathcal{C}}\), a map
     \(
       \circ \colon \mathcal{C}(B,C) \times \mathcal{C}(A,B) \to \mathcal{C}(A,C)
     \)
     called the \emph{composition};
+    the composition is then required to be \emph{associative}, i.e. if \(f \colon A \to B\), \(g \colon B \to C\) and \(h \colon C \to D\) then \((h \circ g) \circ f = h \circ (g \circ f)\);
     \item for each object \(A\), the \emph{identity} morphism \(1_A \colon A \to A\) satisfying \(f \circ 1_A = f\) and \(1_A \circ g = g\) for \(f \colon A \to B\) and \(g \colon B \to A\).
     Diagrammatically, this amounts to the commutativity of
     \begin{center}
@@ -93,8 +94,9 @@ Diagrammatically, an \(\omega\)--chain is represented as %chktex 21
   \end{tikzcd}
 \end{center}
 
-As an upper bound ``dominates'' each element of an ascending \(\omega\)--chain, so the categorical counterpart should be addressed by at least one morphism for each object of the \(\omega\)--chain. %chktex 21
-Additionally, commutativity of the generated diagram is required, because of the possible existence of more than one morphism from a chain object to the ``upper bound'' object.
+As an upper bound ``dominates'' each element of an ascending \(\omega\)--chain, so the categorical counterpart should possess at least one morphism from each chain object to the upper bound object. %chktex 21
+Then, commutativity of the generated diagram is additionally required, so that each path taken to reach the supremum object from each \(D_i\) is equivalent.
+% because of the possible existence of more than one morphism from a chain object to the ``upper bound'' object.
 A \emph{cocone} for an \(\omega\)--chain \(\Delta\) in \(\mathcal{C}\) is %chktex 21
 then defined as a pair \((D, \delta)\), with \(D\) an object of
 \(\mathcal{C}\) and \(\delta = {\langle\delta_n\rangle}_{n\in\mathbb{N}}\)

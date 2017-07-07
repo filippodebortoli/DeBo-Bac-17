@@ -47,7 +47,7 @@ The first criterion to be respected in the construction of a theoretical model f
 \begin{center}
   The more input is provided, the more \((\ge)\) output is expected.
 \end{center}
-How can this be obtained? In mathematical terms, the notion of \emph{monotonic} functions is introduced, namely functions of posets%
+How can this be obtained? In mathematical terms, the notion of \emph{monotonic} functions is introduced, i.e.\ functions on posets%
 \(f \colon (D_1,{}\sqsubseteq_1) \to (D_2,{}\sqsubseteq_2)\) such that
 \(
   \forall{}x,y \in D_1.\; x \sqsubseteq_1 y \implies f(x) \sqsubseteq_2 f(y).
@@ -80,13 +80,13 @@ To back this claim up, we are going to state some fundamental results in the fie
   \(
     f(x) \sqsubseteq x \implies f(f(x)) \sqsubseteq f(x).
   \)
-  
+
   Moreover, we can also say that \(x \sqsubseteq f(x)\), being \(x\) the least element of the set of prefixed points of \(f\).
   Hence, \(x\) is a fixed point of \(f\).
   Last, we notice that each fixed point of \(f\) is also prefixed, so \(x\) is also the least fixed point of \(f\).\qedhere
 \end{proof}
 
-\begin{thm}[Kleene's Fixed point theorem]\label{thm:cpo-fixed}
+\begin{thm}[Kleene's Fixed point theorem~\footnote{Proof omitted; see~\cite{Winskel1993}}]\label{thm:cpo-fixed}
   Let \(f\) be a continuous function from an \(\omega\)--cpo \(D\) to itself. %chktex 21
   Then, \(\lbrace f^n(\bot) \rbrace_{n \in \mathbb{N}}\) is an ascending \(\omega\)--chain in \(D\) and %chktex 21
   \begin{equation}
@@ -95,9 +95,9 @@ To back this claim up, we are going to state some fundamental results in the fie
   is the least fixed point of \(f\).
 \end{thm}
 
-\begin{thm}[Knaster--Tarski]\label{thm:knaster-tarski} %chktex 8
+\begin{thm}[Knaster--Tarski~\footnote{Proof omitted; see~\cite{Winskel1993}}]\label{thm:knaster-tarski} %chktex 8
   Suppose that \((D, {}\sqsubseteq)\) is a complete lattice, that is, a partial order which has greatest lower bounds of arbitrary subsets.
-  Then, for a monotonic function from \(D\) to itself,
+  Then, for a monotonic function \(f\) from \(D\) to itself,
   \begin{equation}
     \fix(f) := \bigsqcap\,\,\lbrace d \in D \colon f(d) \sqsubseteq d \rbrace %chktex 21
   \end{equation}
