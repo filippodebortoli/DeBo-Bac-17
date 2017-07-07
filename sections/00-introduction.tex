@@ -27,7 +27,7 @@ Here, \(f\) is defined as the least fixed point of the function
     g(h) &= \left(n \mapsto \begin{cases}1 & n = 0 \\ n\cdot h(n-1) & n > 0\end{cases}\right)
   \end{split}
 \end{equation*}
-where \(\mathbb{N} \rightharpoonup \mathbb{N}\) is the set of partial functions from \(\mathbb{N}\) to \(\mathbb{N}\); thus is --- thanks to Kleene's fixed point theorem --- the function \(f\) is
+where \(\mathbb{N} \rightharpoonup \mathbb{N}\) is the set of partial functions from \(\mathbb{N}\) to \(\mathbb{N}\); thus --- thanks to Kleene's fixed point theorem --- the function \(f\) is
 \begin{align*}
   f = \bigcup_{n\in\mathbb{N}}g^n(\emptyset) &= \emptyset \cup g(\emptyset) \cup g(g(\emptyset)) \cup \dotsc \\
   &= \lbrace (0,1), (1,1), (2,2), \dotsc \rbrace.
